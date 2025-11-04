@@ -69,22 +69,44 @@
 
             <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Добавить новый цвет:" FontAttributes="Bold" FontSize="14"/>
-                    <Label Text="INSERT INTO ColorOptions (ColorName, IsActive) VALUES ('голубой', 1)" 
-                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Label Text="Добавить новую заставку (только название):" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Деревня', 1)" 
+               FontFamily="Courier" FontSize="11" TextColor="#333"/>
                     <Button Text="📋 Копировать" Clicked="OnCopySql" 
-                            CommandParameter="INSERT INTO ColorOptions (ColorName, IsActive) VALUES ('голубой', 1)" 
-                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                CommandParameter="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Деревня', 1)" 
+                BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
                 </VerticalStackLayout>
             </Frame>
 
             <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Добавить новую заставку (пример):" FontAttributes="Bold" FontSize="14"/>
-                    <Label Text="INSERT INTO SplashOptions (SplashName, ImageUrl, IsActive) VALUES ('Лес', 'https://via.placeholder.com/800x600', 1)" 
+                    <Label Text="Добавить заставку 'Лес':" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Лес', 1)" 
                FontFamily="Courier" FontSize="11" TextColor="#333"/>
                     <Button Text="📋 Копировать" Clicked="OnCopySql" 
-                CommandParameter="INSERT INTO SplashOptions (SplashName, ImageUrl, IsActive) VALUES ('Лес', 'https://via.placeholder.com/800x600', 1)" 
+                CommandParameter="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Лес', 1)" 
+                BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Добавить заставку 'Пляж':" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Пляж', 1)" 
+               FontFamily="Courier" FontSize="11" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                CommandParameter="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Пляж', 1)" 
+                BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Добавить заставку 'Закат':" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Закат', 1)" 
+               FontFamily="Courier" FontSize="11" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                CommandParameter="INSERT INTO SplashOptions (SplashName, IsActive) VALUES ('Закат', 1)" 
                 BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
                 </VerticalStackLayout>
             </Frame>

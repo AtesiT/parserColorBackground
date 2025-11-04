@@ -265,45 +265,45 @@ namespace parserColorBackground
 
                 _databaseService.SetCurrentSplashAsync(splashName);
 
-                var splashes = await _databaseService.GetActiveSplashesAsync();
-                var selectedSplash = splashes.FirstOrDefault(s => s.SplashName == splashName);
+                // Парсим wallpaper изображения напрямую по названию
+                var urls = await _imageParserService.ParseHighQualityWallpapers(splashName, 8);
 
-                if (selectedSplash != null)
+                if (urls.Count > 0)
                 {
-                    // Парсим wallpaper изображения для выбранной заставки
-                    var urls = await _imageParserService.ParseHighQualityWallpapers(splashName, 8);
+                    // Сохраняем первое изображение как текущую заставку
+                    _databaseService.SetCurrentSplashImageUrl(urls[0]);
 
-                    if (urls.Count > 0)
+                    var splashImage = new Image
                     {
-                        // Сохраняем первое изображение как текущую заставку
-                        _databaseService.SetCurrentSplashImageUrl(urls[0]);
+                        Source = ImageSource.FromUri(new Uri(urls[0])),
+                        Aspect = Aspect.AspectFill
+                    };
+                    PreviewFrame.Content = splashImage;
 
-                        var splashImage = new Image
-                        {
-                            Source = ImageSource.FromUri(new Uri(urls[0])),
-                            Aspect = Aspect.AspectFill
-                        };
-                        PreviewFrame.Content = splashImage;
+                    // Автоматически переключаемся на режим просмотра заставок
+                    _isShowingSplashes = true;
+                    ViewModeButton.Text = "🖼️ Заставки";
+                    CollectionTitleLabel.Text = $"Wallpaper: {splashName}";
 
-                        // Автоматически переключаемся на режим просмотра заставок
-                        _isShowingSplashes = true;
-                        ViewModeButton.Text = "🖼️ Заставки";
-                        CollectionTitleLabel.Text = $"Wallpaper: {splashName}";
+                    // Показываем все найденные варианты wallpaper
+                    var imageItems = urls.Select((url, index) => new ImageItem
+                    {
+                        Title = $"{splashName} - HD Wallpaper {index + 1}",
+                        ImageUrl = url,
+                        Type = "Splash"
+                    }).ToList();
 
-                        // Показываем все найденные варианты wallpaper
-                        var imageItems = urls.Select((url, index) => new ImageItem
-                        {
-                            Title = $"{splashName} - HD Wallpaper {index + 1}",
-                            ImageUrl = url,
-                            Type = "Splash"
-                        }).ToList();
+                    ImagesCollectionView.ItemsSource = imageItems;
 
-                        ImagesCollectionView.ItemsSource = imageItems;
-
-                        await DisplayAlert("Успех",
-                            $"✅ Заставка '{splashName}' сохранена!\n\n🖼️ Найдено {urls.Count} HD wallpaper.\n\n💡 Выберите понравившийся wallpaper из списка ниже.\n\n🎬 Он будет отображаться при запуске приложения (2-3 секунды)",
-                            "OK");
-                    }
+                    await DisplayAlert("Успех",
+                        $"✅ Заставка '{splashName}' сохранена!\n\n🖼️ Найдено {urls.Count} HD wallpaper.\n\n💡 Выберите понравившийся wallpaper из списка ниже.\n\n🎬 Он будет отображаться при запуске приложения (2-3 секунды)",
+                        "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Внимание",
+                        $"Не удалось найти wallpaper для '{splashName}'.\n\nПопробуйте другое название или проверьте подключение к интернету.",
+                        "OK");
                 }
             }
             catch (Exception ex)
@@ -501,6 +501,73 @@ namespace parserColorBackground
             }
         }
 
+        private async void OnAddSplashClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await DisplayPromptAsync(
+                    "Новая заставка",
+                    "Введите название заставки (например: Деревня, Лес, Пляж, Закат):",
+                    "Добавить",
+                    "Отмена",
+                    placeholder: "Название заставки",
+                    maxLength: 50
+                );
+
+                if (!string.IsNullOrWhiteSpace(result))
+                {
+                    // Проверяем, существует ли уже такая заставка
+                    var exists = await _databaseService.SplashExistsAsync(result);
+
+                    if (exists)
+                    {
+                        await DisplayAlert("Внимание",
+                            $"Заставка '{result}' уже существует в базе данных!",
+                            "OK");
+                        return;
+                    }
+
+                    LoadingIndicator.IsVisible = true;
+                    LoadingIndicator.IsRunning = true;
+
+                    // Добавляем новую заставку
+                    await _databaseService.AddSplashByNameAsync(result);
+
+                    // Сразу парсим изображения для превью
+                    var urls = await _imageParserService.ParseHighQualityWallpapers(result, 3);
+
+                    if (urls.Count > 0)
+                    {
+                        // Показываем превью первого изображения
+                        var previewImage = new Image
+                        {
+                            Source = ImageSource.FromUri(new Uri(urls[0])),
+                            Aspect = Aspect.AspectFill
+                        };
+                        PreviewFrame.Content = previewImage;
+
+                        await DisplayAlert("Успех",
+                            $"✅ Заставка '{result}' успешно добавлена!\n\n🖼️ Найдено {urls.Count} wallpaper.\n\nТеперь вы можете выбрать её через кнопку 'Выбрать заставку'",
+                            "OK");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Внимание",
+                            $"Заставка '{result}' добавлена, но изображения не найдены.\n\nПопробуйте другое название или проверьте подключение к интернету.",
+                            "OK");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Не удалось добавить заставку: {ex.Message}", "OK");
+            }
+            finally
+            {
+                LoadingIndicator.IsRunning = false;
+                LoadingIndicator.IsVisible = false;
+            }
+        }
 
     }
 }

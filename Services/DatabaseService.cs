@@ -41,45 +41,46 @@ namespace parserColorBackground.Services
             var count = _database.Table<SplashOption>().CountAsync().Result;
             if (count == 0)
             {
+                // Теперь ImageUrl можно оставить пустым или null - изображения будут парситься
                 _database.InsertAsync(new SplashOption
                 {
                     SplashName = "Пустыня",
-                    ImageUrl = "https://via.placeholder.com/800x600/F4A460/FFFFFF?text=Desert",
+                    ImageUrl = null, // Будет парситься из интернета
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
                     SplashName = "Джунгли",
-                    ImageUrl = "https://via.placeholder.com/800x600/228B22/FFFFFF?text=Jungle",
+                    ImageUrl = null,
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
                     SplashName = "Город",
-                    ImageUrl = "https://via.placeholder.com/800x600/708090/FFFFFF?text=City",
+                    ImageUrl = null,
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
                     SplashName = "Океан",
-                    ImageUrl = "https://via.placeholder.com/800x600/1E90FF/FFFFFF?text=Ocean",
+                    ImageUrl = null,
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
                     SplashName = "Горы",
-                    ImageUrl = "https://via.placeholder.com/800x600/A9A9A9/FFFFFF?text=Mountains",
+                    ImageUrl = null,
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
                     SplashName = "Космос",
-                    ImageUrl = "https://via.placeholder.com/800x600/000080/FFFFFF?text=Space",
+                    ImageUrl = null,
                     IsActive = true
                 }).Wait();
             }
@@ -468,6 +469,42 @@ namespace parserColorBackground.Services
             }
         }
 
+        public async Task<int> AddSplashByNameAsync(string splashName)
+        {
+            try
+            {
+                var newSplash = new SplashOption
+                {
+                    SplashName = splashName,
+                    ImageUrl = null, // Изображения будут парситься автоматически
+                    IsActive = true
+                };
+
+                return await _database.InsertAsync(newSplash);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding splash: {ex.Message}");
+                return 0;
+            }
+        }
+
+        // Проверить существует ли заставка
+        public async Task<bool> SplashExistsAsync(string splashName)
+        {
+            try
+            {
+                var splash = await _database.Table<SplashOption>()
+                                            .Where(s => s.SplashName.ToLower() == splashName.ToLower())
+                                            .FirstOrDefaultAsync();
+                return splash != null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking splash: {ex.Message}");
+                return false;
+            }
+        }
         #endregion
     }
 }

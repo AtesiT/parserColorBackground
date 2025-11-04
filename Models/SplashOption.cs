@@ -11,6 +11,7 @@ namespace parserColorBackground.Models
         [MaxLength(100)]
         public string SplashName { get; set; }
 
+        // ImageUrl теперь необязательное поле - будет парситься автоматически
         public string ImageUrl { get; set; }
 
         public bool IsActive { get; set; }

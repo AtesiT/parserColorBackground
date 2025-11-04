@@ -148,74 +148,74 @@ namespace parserColorBackground.Services
         private List<string> GenerateSplashSamples(string splashName)
         {
             var samples = new Dictionary<string, List<string>>
+    {
+        { "пустыня", new List<string>
             {
-                {
-                    "пустыня",
-                    new List<string>
-                    {
-                        "https://via.placeholder.com/1920x1080/F4A460/8B4513?text=Desert+Wallpaper+4K",
-                        "https://via.placeholder.com/2560x1440/DEB887/8B4513?text=Sand+Dunes+HD",
-                        "https://placehold.co/1920x1080/D2691E/FFE4B5?text=Sahara+Desert+Wallpaper",
-                        "https://placehold.co/2560x1440/CD853F/F5DEB3?text=Desert+Sunset+4K",
-                        "https://via.placeholder.com/3840x2160/F5DEB3/8B4513?text=Desert+Ultra+HD"
-                    }
-                },
-                {
-                    "джунгли",
-                    new List<string>
-                    {
-                        "https://via.placeholder.com/1920x1080/228B22/006400?text=Jungle+Wallpaper+4K",
-                        "https://via.placeholder.com/2560x1440/32CD32/006400?text=Tropical+Forest+HD",
-                        "https://placehold.co/1920x1080/2E8B57/90EE90?text=Amazon+Rainforest",
-                        "https://placehold.co/2560x1440/3CB371/98FB98?text=Wild+Jungle+4K",
-                        "https://via.placeholder.com/3840x2160/228B22/ADFF2F?text=Jungle+Ultra+HD"
-                    }
-                },
-                {
-                    "город",
-                    new List<string>
-                    {
-                        "https://via.placeholder.com/1920x1080/708090/2F4F4F?text=City+Wallpaper+4K",
-                        "https://via.placeholder.com/2560x1440/696969/D3D3D3?text=Urban+Skyline+HD",
-                        "https://placehold.co/1920x1080/778899/C0C0C0?text=Night+City+Wallpaper",
-                        "https://placehold.co/2560x1440/A9A9A9/DCDCDC?text=Metropolis+4K",
-                        "https://via.placeholder.com/3840x2160/2F4F4F/D3D3D3?text=City+Ultra+HD"
-                    }
-                },
-                {
-                    "океан",
-                    new List<string>
-                    {
-                        "https://via.placeholder.com/1920x1080/1E90FF/00008B?text=Ocean+Wallpaper+4K",
-                        "https://via.placeholder.com/2560x1440/4169E1/000080?text=Blue+Ocean+HD",
-                        "https://placehold.co/1920x1080/0000CD/87CEEB?text=Sea+Waves+Wallpaper",
-                        "https://placehold.co/2560x1440/4682B4/B0E0E6?text=Deep+Ocean+4K",
-                        "https://via.placeholder.com/3840x2160/1E90FF/ADD8E6?text=Ocean+Ultra+HD"
-                    }
-                },
-                {
-                    "горы",
-                    new List<string>
-                    {
-                        "https://via.placeholder.com/1920x1080/A9A9A9/2F4F4F?text=Mountain+Wallpaper+4K",
-                        "https://via.placeholder.com/2560x1440/808080/FFFAF0?text=Snow+Peaks+HD",
-                        "https://placehold.co/1920x1080/696969/F0F8FF?text=Alps+Wallpaper",
-                        "https://placehold.co/2560x1440/778899/FFFFFF?text=Mountain+Range+4K",
-                        "https://via.placeholder.com/3840x2160/A9A9A9/FFFAFA?text=Mountains+Ultra+HD"
-                    }
-                },
-                {
-                    "космос",
-                    new List<string>
-                    {
-                        "https://via.placeholder.com/1920x1080/000080/4169E1?text=Space+Wallpaper+4K",
-                        "https://via.placeholder.com/2560x1440/191970/9370DB?text=Galaxy+HD",
-                        "https://placehold.co/1920x1080/000000/8A2BE2?text=Universe+Wallpaper",
-                        "https://placehold.co/2560x1440/0C0C1E/BA55D3?text=Nebula+4K",
-                        "https://via.placeholder.com/3840x2160/000033/9370DB?text=Space+Ultra+HD"
-                    }
-                }
-            };
+                "https://via.placeholder.com/1920x1080/F4A460/8B4513?text=Desert+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/DEB887/8B4513?text=Sand+Dunes+HD",
+                "https://placehold.co/1920x1080/D2691E/FFE4B5?text=Sahara+Desert",
+            }
+        },
+        { "джунгли", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/228B22/006400?text=Jungle+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/32CD32/006400?text=Tropical+Forest+HD",
+            }
+        },
+        { "город", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/708090/2F4F4F?text=City+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/696969/D3D3D3?text=Urban+Skyline+HD",
+            }
+        },
+        { "океан", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/1E90FF/00008B?text=Ocean+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/4169E1/000080?text=Blue+Ocean+HD",
+            }
+        },
+        { "горы", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/A9A9A9/2F4F4F?text=Mountain+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/808080/FFFAF0?text=Snow+Peaks+HD",
+            }
+        },
+        { "космос", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/000080/4169E1?text=Space+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/191970/9370DB?text=Galaxy+HD",
+            }
+        },
+        // Добавим новые темы
+        { "деревня", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/8B4513/F5DEB3?text=Village+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/A0522D/FFDEAD?text=Countryside+HD",
+                "https://placehold.co/1920x1080/CD853F/FFE4B5?text=Rural+Village",
+            }
+        },
+        { "лес", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/228B22/006400?text=Forest+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/2E8B57/90EE90?text=Green+Forest+HD",
+                "https://placehold.co/1920x1080/3CB371/98FB98?text=Woods",
+            }
+        },
+        { "пляж", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/87CEEB/F0E68C?text=Beach+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/87CEFA/FFE4B5?text=Sandy+Beach+HD",
+                "https://placehold.co/1920x1080/00BFFF/F5DEB3?text=Tropical+Beach",
+            }
+        },
+        { "закат", new List<string>
+            {
+                "https://via.placeholder.com/1920x1080/FF4500/FFD700?text=Sunset+Wallpaper+4K",
+                "https://via.placeholder.com/2560x1440/FF6347/FFA500?text=Beautiful+Sunset+HD",
+                "https://placehold.co/1920x1080/FF7F50/FFDB58?text=Golden+Sunset",
+            }
+        }
+    };
 
             var key = splashName.ToLower();
             if (samples.ContainsKey(key))
@@ -223,15 +223,14 @@ namespace parserColorBackground.Services
                 return samples[key];
             }
 
-            // Генерируем случайные wallpaper если не найдено
+            // Универсальный fallback для ЛЮБОГО названия
             return new List<string>
-            {
-                $"https://via.placeholder.com/1920x1080/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}+Wallpaper",
-                $"https://via.placeholder.com/2560x1440/546E7A/FFFFFF?text={Uri.EscapeDataString(splashName)}+HD",
-                $"https://placehold.co/1920x1080/455A64/FFFFFF?text={Uri.EscapeDataString(splashName)}+4K",
-                $"https://placehold.co/2560x1440/37474F/FFFFFF?text={Uri.EscapeDataString(splashName)}+UHD",
-                $"https://via.placeholder.com/3840x2160/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}+Ultra"
-            };
+    {
+        $"https://via.placeholder.com/1920x1080/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}+Wallpaper+4K",
+        $"https://via.placeholder.com/2560x1440/546E7A/FFFFFF?text={Uri.EscapeDataString(splashName)}+HD",
+        $"https://placehold.co/1920x1080/455A64/FFFFFF?text={Uri.EscapeDataString(splashName)}+UHD",
+        $"https://placehold.co/2560x1440/37474F/FFFFFF?text={Uri.EscapeDataString(splashName)}+4K"
+    };
         }
 
         // Дополнительный метод для получения обоев высокого качества

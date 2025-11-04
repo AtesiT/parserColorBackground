@@ -99,6 +99,16 @@
                 CornerRadius="10"
                 HeightRequest="60"/>
 
+            <Button 
+                x:Name="AddSplashButton"
+                Text="➕ Добавить новую заставку"
+                FontSize="16"
+                Clicked="OnAddSplashClicked"
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"/>
+
             <Label 
                 x:Name="SelectedColorLabel"
                 Text="Цвет не выбран"
