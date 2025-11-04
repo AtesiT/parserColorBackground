@@ -53,3 +53,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = parserColorBackground.SplashPage.xaml
 build_metadata.AdditionalFiles.TargetPath = SplashPage.xaml
 build_metadata.AdditionalFiles.RelativePath = SplashPage.xaml
+
+[D:/Keys And Documents/Labs/4 Course/parserColorBackground/SqlExamplesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = parserColorBackground.SqlExamplesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = SqlExamplesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = SqlExamplesPage.xaml

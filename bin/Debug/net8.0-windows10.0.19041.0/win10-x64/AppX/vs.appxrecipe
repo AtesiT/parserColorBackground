@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-11-04T09:07:51.361</Modified>
+      <Modified>2025-11-04T10:00:17.407</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-11-04T08:26:00.657</Modified>
+      <Modified>2025-11-04T09:33:50.251</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.runtimeconfig.json">
       <PackagePath>parserColorBackground.runtimeconfig.json</PackagePath>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.dll">
       <PackagePath>parserColorBackground.dll</PackagePath>
-      <Modified>2025-11-04T09:07:50.711</Modified>
+      <Modified>2025-11-04T10:00:16.707</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>parserColorBackground.exe</PackagePath>
-      <Modified>2025-11-04T09:07:50.711</Modified>
+      <Modified>2025-11-04T10:00:16.718</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -288,7 +288,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.deps.json">
       <PackagePath>parserColorBackground.deps.json</PackagePath>
-      <Modified>2025-11-04T08:26:00.461</Modified>
+      <Modified>2025-11-04T09:33:49.952</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.57\lib\net8.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>

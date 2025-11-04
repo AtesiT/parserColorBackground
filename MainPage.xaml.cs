@@ -18,6 +18,11 @@ namespace parserColorBackground
             _imageParserService = new ImageParserService();
             _jintService = new JintService();
 
+            MessagingCenter.Subscribe<SqlExamplesPage, string>(this, "SqlCopied", (sender, sql) =>
+            {
+                SqlQueryEditor.Text = sql;
+            });
+
             LoadSavedSettings();
         }
 
@@ -141,14 +146,14 @@ namespace parserColorBackground
 
                 foreach (var splash in splashes)
                 {
-                    // Парсим изображения для каждой заставки
-                    var urls = await _imageParserService.ParseSplashImages(splash.SplashName, 3);
+                    // Парсим HD wallpaper для каждой заставки
+                    var urls = await _imageParserService.ParseHighQualityWallpapers(splash.SplashName, 4);
 
                     foreach (var url in urls)
                     {
                         imageItems.Add(new ImageItem
                         {
-                            Title = splash.SplashName,
+                            Title = $"{splash.SplashName} - HD Wallpaper",
                             ImageUrl = url,
                             Type = "Splash"
                         });
@@ -156,10 +161,11 @@ namespace parserColorBackground
                 }
 
                 ImagesCollectionView.ItemsSource = imageItems;
+                CollectionTitleLabel.Text = "HD Wallpaper для заставок";
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Не удалось загрузить заставки: {ex.Message}", "OK");
+                await DisplayAlert("Ошибка", $"Не удалось загрузить wallpaper: {ex.Message}", "OK");
             }
             finally
             {
@@ -264,8 +270,8 @@ namespace parserColorBackground
 
                 if (selectedSplash != null)
                 {
-                    // Парсим изображения для выбранной заставки
-                    var urls = await _imageParserService.ParseSplashImages(splashName, 5);
+                    // Парсим wallpaper изображения для выбранной заставки
+                    var urls = await _imageParserService.ParseHighQualityWallpapers(splashName, 8);
 
                     if (urls.Count > 0)
                     {
@@ -282,12 +288,12 @@ namespace parserColorBackground
                         // Автоматически переключаемся на режим просмотра заставок
                         _isShowingSplashes = true;
                         ViewModeButton.Text = "🖼️ Заставки";
-                        CollectionTitleLabel.Text = "Доступные заставки";
+                        CollectionTitleLabel.Text = $"Wallpaper: {splashName}";
 
-                        // Показываем все найденные варианты
+                        // Показываем все найденные варианты wallpaper
                         var imageItems = urls.Select((url, index) => new ImageItem
                         {
-                            Title = $"{splashName} - вариант {index + 1}",
+                            Title = $"{splashName} - HD Wallpaper {index + 1}",
                             ImageUrl = url,
                             Type = "Splash"
                         }).ToList();
@@ -295,14 +301,14 @@ namespace parserColorBackground
                         ImagesCollectionView.ItemsSource = imageItems;
 
                         await DisplayAlert("Успех",
-                            $"✅ Заставка '{splashName}' сохранена!\n\n📸 Найдено {urls.Count} вариантов изображений.\n\n💡 Выберите понравившееся из списка ниже.\n\nОна будет отображаться при следующем запуске приложения",
+                            $"✅ Заставка '{splashName}' сохранена!\n\n🖼️ Найдено {urls.Count} HD wallpaper.\n\n💡 Выберите понравившийся wallpaper из списка ниже.\n\n🎬 Он будет отображаться при запуске приложения (2-3 секунды)",
                             "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Не удалось загрузить заставку: {ex.Message}", "OK");
+                await DisplayAlert("Ошибка", $"Не удалось загрузить wallpaper: {ex.Message}", "OK");
             }
             finally
             {
@@ -479,5 +485,22 @@ namespace parserColorBackground
             var brightness = (backgroundColor.Red * 299 + backgroundColor.Green * 587 + backgroundColor.Blue * 114) / 1000;
             return brightness < 0.5 ? Colors.White : Colors.Black;
         }
+
+
+
+        private async void OnShowSqlExamplesClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var examplesPage = new SqlExamplesPage();
+                await Navigation.PushModalAsync(examplesPage);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Не удалось открыть примеры: {ex.Message}", "OK");
+            }
+        }
+
+
     }
 }

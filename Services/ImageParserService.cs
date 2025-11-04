@@ -20,7 +20,7 @@ namespace parserColorBackground.Services
 
             try
             {
-                var searchQuery = $"{colorName} background";
+                var searchQuery = $"{colorName} background wallpaper 4k";
                 var encodedQuery = HttpUtility.UrlEncode(searchQuery);
                 var url = $"https://www.google.com/search?q={encodedQuery}&tbm=isch";
 
@@ -63,7 +63,18 @@ namespace parserColorBackground.Services
 
             try
             {
-                var searchQuery = $"{splashName} splash screen app";
+                // Формируем поисковый запрос для wallpaper с высоким качеством
+                var searchQuery = splashName.ToLower() switch
+                {
+                    "пустыня" => "desert landscape wallpaper 4k hd",
+                    "джунгли" => "jungle tropical forest wallpaper 4k hd",
+                    "город" => "city skyline urban wallpaper 4k hd night",
+                    "океан" => "ocean sea waves wallpaper 4k hd blue",
+                    "горы" => "mountains peaks landscape wallpaper 4k hd",
+                    "космос" => "space galaxy stars nebula wallpaper 4k hd",
+                    _ => $"{splashName} landscape wallpaper 4k hd"
+                };
+
                 var encodedQuery = HttpUtility.UrlEncode(searchQuery);
                 var url = $"https://www.google.com/search?q={encodedQuery}&tbm=isch";
 
@@ -106,11 +117,18 @@ namespace parserColorBackground.Services
             {
                 { "розовый", "FFC0CB" },
                 { "чёрный", "000000" },
+                { "черный", "000000" },
                 { "синий", "0000FF" },
                 { "зелёный", "00FF00" },
+                { "зеленый", "00FF00" },
                 { "красный", "FF0000" },
                 { "белый", "FFFFFF" },
-                { "жёлтый", "FFFF00" }
+                { "жёлтый", "FFFF00" },
+                { "желтый", "FFFF00" },
+                { "оранжевый", "FFA500" },
+                { "фиолетовый", "9370DB" },
+                { "серый", "808080" },
+                { "коричневый", "8B4513" }
             };
 
             var colorCode = colors.ContainsKey(colorName.ToLower())
@@ -119,11 +137,11 @@ namespace parserColorBackground.Services
 
             return new List<string>
             {
-                $"https://via.placeholder.com/800x600/{colorCode}/{colorCode}",
-                $"https://via.placeholder.com/1024x768/{colorCode}/{colorCode}",
-                $"https://via.placeholder.com/1920x1080/{colorCode}/{colorCode}",
-                $"https://placehold.co/800x600/{colorCode}/{colorCode}",
-                $"https://placehold.co/1024x768/{colorCode}/{colorCode}"
+                $"https://via.placeholder.com/1920x1080/{colorCode}/{colorCode}?text=Wallpaper",
+                $"https://via.placeholder.com/2560x1440/{colorCode}/{colorCode}?text=HD+Wallpaper",
+                $"https://placehold.co/1920x1080/{colorCode}/{colorCode}?text=4K+Wallpaper",
+                $"https://placehold.co/2560x1440/{colorCode}/{colorCode}?text=Ultra+HD",
+                $"https://via.placeholder.com/3840x2160/{colorCode}/{colorCode}?text=4K+Ultra"
             };
         }
 
@@ -132,43 +150,69 @@ namespace parserColorBackground.Services
             var samples = new Dictionary<string, List<string>>
             {
                 {
-                    "логотип компании",
+                    "пустыня",
                     new List<string>
                     {
-                        "https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Company+Logo",
-                        "https://via.placeholder.com/1080x1920/4CAF50/FFFFFF?text=Welcome",
-                        "https://placehold.co/800x600/4CAF50/FFFFFF?text=Logo",
-                        "https://placehold.co/1080x1920/2E7D32/FFFFFF?text=Company"
+                        "https://via.placeholder.com/1920x1080/F4A460/8B4513?text=Desert+Wallpaper+4K",
+                        "https://via.placeholder.com/2560x1440/DEB887/8B4513?text=Sand+Dunes+HD",
+                        "https://placehold.co/1920x1080/D2691E/FFE4B5?text=Sahara+Desert+Wallpaper",
+                        "https://placehold.co/2560x1440/CD853F/F5DEB3?text=Desert+Sunset+4K",
+                        "https://via.placeholder.com/3840x2160/F5DEB3/8B4513?text=Desert+Ultra+HD"
                     }
                 },
                 {
-                    "приветствие",
+                    "джунгли",
                     new List<string>
                     {
-                        "https://via.placeholder.com/800x600/2196F3/FFFFFF?text=Welcome",
-                        "https://via.placeholder.com/1080x1920/2196F3/FFFFFF?text=Hello",
-                        "https://placehold.co/800x600/1976D2/FFFFFF?text=Welcome",
-                        "https://placehold.co/1080x1920/0D47A1/FFFFFF?text=Greetings"
+                        "https://via.placeholder.com/1920x1080/228B22/006400?text=Jungle+Wallpaper+4K",
+                        "https://via.placeholder.com/2560x1440/32CD32/006400?text=Tropical+Forest+HD",
+                        "https://placehold.co/1920x1080/2E8B57/90EE90?text=Amazon+Rainforest",
+                        "https://placehold.co/2560x1440/3CB371/98FB98?text=Wild+Jungle+4K",
+                        "https://via.placeholder.com/3840x2160/228B22/ADFF2F?text=Jungle+Ultra+HD"
                     }
                 },
                 {
-                    "загрузка",
+                    "город",
                     new List<string>
                     {
-                        "https://via.placeholder.com/800x600/FF9800/FFFFFF?text=Loading...",
-                        "https://via.placeholder.com/1080x1920/FF9800/FFFFFF?text=Please+Wait",
-                        "https://placehold.co/800x600/F57C00/FFFFFF?text=Loading",
-                        "https://placehold.co/1080x1920/E65100/FFFFFF?text=Wait"
+                        "https://via.placeholder.com/1920x1080/708090/2F4F4F?text=City+Wallpaper+4K",
+                        "https://via.placeholder.com/2560x1440/696969/D3D3D3?text=Urban+Skyline+HD",
+                        "https://placehold.co/1920x1080/778899/C0C0C0?text=Night+City+Wallpaper",
+                        "https://placehold.co/2560x1440/A9A9A9/DCDCDC?text=Metropolis+4K",
+                        "https://via.placeholder.com/3840x2160/2F4F4F/D3D3D3?text=City+Ultra+HD"
                     }
                 },
                 {
-                    "старт",
+                    "океан",
                     new List<string>
                     {
-                        "https://via.placeholder.com/800x600/9C27B0/FFFFFF?text=Start",
-                        "https://via.placeholder.com/1080x1920/9C27B0/FFFFFF?text=Begin",
-                        "https://placehold.co/800x600/7B1FA2/FFFFFF?text=Start",
-                        "https://placehold.co/1080x1920/4A148C/FFFFFF?text=Launch"
+                        "https://via.placeholder.com/1920x1080/1E90FF/00008B?text=Ocean+Wallpaper+4K",
+                        "https://via.placeholder.com/2560x1440/4169E1/000080?text=Blue+Ocean+HD",
+                        "https://placehold.co/1920x1080/0000CD/87CEEB?text=Sea+Waves+Wallpaper",
+                        "https://placehold.co/2560x1440/4682B4/B0E0E6?text=Deep+Ocean+4K",
+                        "https://via.placeholder.com/3840x2160/1E90FF/ADD8E6?text=Ocean+Ultra+HD"
+                    }
+                },
+                {
+                    "горы",
+                    new List<string>
+                    {
+                        "https://via.placeholder.com/1920x1080/A9A9A9/2F4F4F?text=Mountain+Wallpaper+4K",
+                        "https://via.placeholder.com/2560x1440/808080/FFFAF0?text=Snow+Peaks+HD",
+                        "https://placehold.co/1920x1080/696969/F0F8FF?text=Alps+Wallpaper",
+                        "https://placehold.co/2560x1440/778899/FFFFFF?text=Mountain+Range+4K",
+                        "https://via.placeholder.com/3840x2160/A9A9A9/FFFAFA?text=Mountains+Ultra+HD"
+                    }
+                },
+                {
+                    "космос",
+                    new List<string>
+                    {
+                        "https://via.placeholder.com/1920x1080/000080/4169E1?text=Space+Wallpaper+4K",
+                        "https://via.placeholder.com/2560x1440/191970/9370DB?text=Galaxy+HD",
+                        "https://placehold.co/1920x1080/000000/8A2BE2?text=Universe+Wallpaper",
+                        "https://placehold.co/2560x1440/0C0C1E/BA55D3?text=Nebula+4K",
+                        "https://via.placeholder.com/3840x2160/000033/9370DB?text=Space+Ultra+HD"
                     }
                 }
             };
@@ -179,14 +223,60 @@ namespace parserColorBackground.Services
                 return samples[key];
             }
 
-            // Генерируем случайные заставки если не найдено
+            // Генерируем случайные wallpaper если не найдено
             return new List<string>
             {
-                $"https://via.placeholder.com/800x600/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}",
-                $"https://via.placeholder.com/1080x1920/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}",
-                $"https://placehold.co/800x600/455A64/FFFFFF?text={Uri.EscapeDataString(splashName)}",
-                $"https://placehold.co/1080x1920/37474F/FFFFFF?text={Uri.EscapeDataString(splashName)}"
+                $"https://via.placeholder.com/1920x1080/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}+Wallpaper",
+                $"https://via.placeholder.com/2560x1440/546E7A/FFFFFF?text={Uri.EscapeDataString(splashName)}+HD",
+                $"https://placehold.co/1920x1080/455A64/FFFFFF?text={Uri.EscapeDataString(splashName)}+4K",
+                $"https://placehold.co/2560x1440/37474F/FFFFFF?text={Uri.EscapeDataString(splashName)}+UHD",
+                $"https://via.placeholder.com/3840x2160/607D8B/FFFFFF?text={Uri.EscapeDataString(splashName)}+Ultra"
             };
+        }
+
+        // Дополнительный метод для получения обоев высокого качества
+        public async Task<List<string>> ParseHighQualityWallpapers(string theme, int maxResults = 15)
+        {
+            var imageUrls = new List<string>();
+
+            try
+            {
+                // Более специфичный поиск для wallpaper
+                var searchQuery = $"{theme} wallpaper 4k ultra hd desktop background";
+                var encodedQuery = HttpUtility.UrlEncode(searchQuery);
+                var url = $"https://www.google.com/search?q={encodedQuery}&tbm=isch&tbs=isz:l"; // isz:l - большие изображения
+
+                var response = await _httpClient.GetStringAsync(url);
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(response);
+
+                var imgNodes = doc.DocumentNode.SelectNodes("//img");
+
+                if (imgNodes != null)
+                {
+                    foreach (var img in imgNodes.Take(maxResults))
+                    {
+                        var src = img.GetAttributeValue("src", "");
+                        if (!string.IsNullOrEmpty(src) && src.StartsWith("http"))
+                        {
+                            imageUrls.Add(src);
+                        }
+                    }
+                }
+
+                if (imageUrls.Count == 0)
+                {
+                    imageUrls = GenerateSplashSamples(theme);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка парсинга HD обоев: {ex.Message}");
+                imageUrls = GenerateSplashSamples(theme);
+            }
+
+            return imageUrls;
         }
     }
 }

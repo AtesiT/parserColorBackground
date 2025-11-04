@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="parserColorBackground.SqlExamplesPage"
+             Title="Примеры SQL запросов"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label 
+                Text="📚 Примеры SQL запросов"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20"/>
+
+            <!-- Просмотр данных -->
+            <Label 
+                Text="📊 Просмотр данных"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#2196F3"
+                Margin="0,10,0,5"/>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Все цвета:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="SELECT * FROM ColorOptions" FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" CommandParameter="SELECT * FROM ColorOptions" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Активные цвета:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="SELECT * FROM ColorOptions WHERE IsActive = 1" FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" CommandParameter="SELECT * FROM ColorOptions WHERE IsActive = 1" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Все заставки:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="SELECT * FROM SplashOptions" FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" CommandParameter="SELECT * FROM SplashOptions" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Сохраненные фоны:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="SELECT * FROM SavedBackgrounds" FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" CommandParameter="SELECT * FROM SavedBackgrounds" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Добавление данных -->
+            <Label 
+                Text="➕ Добавление данных"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#4CAF50"
+                Margin="0,20,0,5"/>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Добавить новый цвет:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO ColorOptions (ColorName, IsActive) VALUES ('голубой', 1)" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="INSERT INTO ColorOptions (ColorName, IsActive) VALUES ('голубой', 1)" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Добавить новую заставку (пример):" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO SplashOptions (SplashName, ImageUrl, IsActive) VALUES ('Лес', 'https://via.placeholder.com/800x600', 1)" 
+               FontFamily="Courier" FontSize="11" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                CommandParameter="INSERT INTO SplashOptions (SplashName, ImageUrl, IsActive) VALUES ('Лес', 'https://via.placeholder.com/800x600', 1)" 
+                BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Добавить заставку 'Пляж':" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="INSERT INTO SplashOptions (SplashName, ImageUrl, IsActive) VALUES ('Пляж', 'https://via.placeholder.com/800x600', 1)" 
+               FontFamily="Courier" FontSize="11" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                CommandParameter="INSERT INTO SplashOptions (SplashName, ImageUrl, IsActive) VALUES ('Пляж', 'https://via.placeholder.com/800x600', 1)" 
+                BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Обновление данных -->
+            <Label 
+                Text="✏️ Обновление данных"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#FF9800"
+                Margin="0,20,0,5"/>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Отключить цвет:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="UPDATE ColorOptions SET IsActive = 0 WHERE ColorName = 'черный'" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="UPDATE ColorOptions SET IsActive = 0 WHERE ColorName = 'черный'" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Включить заставку:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="UPDATE SplashOptions SET IsActive = 1 WHERE Id = 1" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="UPDATE SplashOptions SET IsActive = 1 WHERE Id = 1" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Удаление данных -->
+            <Label 
+                Text="🗑️ Удаление данных"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#F44336"
+                Margin="0,20,0,5"/>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Удалить цвет по ID:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="DELETE FROM ColorOptions WHERE Id = 5" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="DELETE FROM ColorOptions WHERE Id = 5" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Удалить заставку:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="DELETE FROM SplashOptions WHERE SplashName = 'Старт'" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="DELETE FROM SplashOptions WHERE SplashName = 'Старт'" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Расширенные запросы -->
+            <Label 
+                Text="🚀 Расширенные запросы"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#9C27B0"
+                Margin="0,20,0,5"/>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Поиск цвета:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="SELECT * FROM ColorOptions WHERE ColorName LIKE '%роз%'" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="SELECT * FROM ColorOptions WHERE ColorName LIKE '%роз%'" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="10" CornerRadius="8" HasShadow="True" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Текущий фон:" FontAttributes="Bold" FontSize="14"/>
+                    <Label Text="SELECT * FROM SavedBackgrounds WHERE IsCurrent = 1" 
+                           FontFamily="Courier" FontSize="13" TextColor="#333"/>
+                    <Button Text="📋 Копировать" Clicked="OnCopySql" 
+                            CommandParameter="SELECT * FROM SavedBackgrounds WHERE IsCurrent = 1" 
+                            BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" HeightRequest="40"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button 
+                Text="✖️ Закрыть"
+                Clicked="OnCloseClicked"
+                BackgroundColor="#607D8B"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Margin="0,20,0,20"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -43,29 +43,43 @@ namespace parserColorBackground.Services
             {
                 _database.InsertAsync(new SplashOption
                 {
-                    SplashName = "Логотип компании",
-                    ImageUrl = "https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Company+Logo",
+                    SplashName = "Пустыня",
+                    ImageUrl = "https://via.placeholder.com/800x600/F4A460/FFFFFF?text=Desert",
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
-                    SplashName = "Приветствие",
-                    ImageUrl = "https://via.placeholder.com/800x600/2196F3/FFFFFF?text=Welcome",
+                    SplashName = "Джунгли",
+                    ImageUrl = "https://via.placeholder.com/800x600/228B22/FFFFFF?text=Jungle",
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
-                    SplashName = "Загрузка",
-                    ImageUrl = "https://via.placeholder.com/800x600/FF9800/FFFFFF?text=Loading...",
+                    SplashName = "Город",
+                    ImageUrl = "https://via.placeholder.com/800x600/708090/FFFFFF?text=City",
                     IsActive = true
                 }).Wait();
 
                 _database.InsertAsync(new SplashOption
                 {
-                    SplashName = "Старт",
-                    ImageUrl = "https://via.placeholder.com/800x600/9C27B0/FFFFFF?text=Start",
+                    SplashName = "Океан",
+                    ImageUrl = "https://via.placeholder.com/800x600/1E90FF/FFFFFF?text=Ocean",
+                    IsActive = true
+                }).Wait();
+
+                _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Горы",
+                    ImageUrl = "https://via.placeholder.com/800x600/A9A9A9/FFFFFF?text=Mountains",
+                    IsActive = true
+                }).Wait();
+
+                _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Космос",
+                    ImageUrl = "https://via.placeholder.com/800x600/000080/FFFFFF?text=Space",
                     IsActive = true
                 }).Wait();
             }
@@ -395,6 +409,62 @@ namespace parserColorBackground.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Error clearing preferences: {ex.Message}");
+            }
+        }
+
+        public async Task UpdateSplashesToNewThemes()
+        {
+            try
+            {
+                // Удаляем старые заставки
+                await _database.ExecuteAsync("DELETE FROM SplashOptions");
+
+                // Добавляем новые тематические заставки
+                await _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Пустыня",
+                    ImageUrl = "https://via.placeholder.com/800x600/F4A460/FFFFFF?text=Desert",
+                    IsActive = true
+                });
+
+                await _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Джунгли",
+                    ImageUrl = "https://via.placeholder.com/800x600/228B22/FFFFFF?text=Jungle",
+                    IsActive = true
+                });
+
+                await _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Город",
+                    ImageUrl = "https://via.placeholder.com/800x600/708090/FFFFFF?text=City",
+                    IsActive = true
+                });
+
+                await _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Океан",
+                    ImageUrl = "https://via.placeholder.com/800x600/1E90FF/FFFFFF?text=Ocean",
+                    IsActive = true
+                });
+
+                await _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Горы",
+                    ImageUrl = "https://via.placeholder.com/800x600/A9A9A9/FFFFFF?text=Mountains",
+                    IsActive = true
+                });
+
+                await _database.InsertAsync(new SplashOption
+                {
+                    SplashName = "Космос",
+                    ImageUrl = "https://via.placeholder.com/800x600/000080/FFFFFF?text=Space",
+                    IsActive = true
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка обновления заставок: {ex.Message}");
             }
         }
 

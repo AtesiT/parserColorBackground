@@ -33,23 +33,32 @@
                         FontSize="14"
                         AutoSize="TextChanges"/>
 
-                    <HorizontalStackLayout Spacing="10">
+                    <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
                         <Button 
+                            Grid.Column="0"
                             Text="▶ Выполнить SQL"
                             Clicked="OnExecuteSqlClicked"
                             BackgroundColor="#9C27B0"
                             TextColor="White"
-                            CornerRadius="8"
-                            HorizontalOptions="FillAndExpand"/>
+                            CornerRadius="8"/>
 
                         <Button 
+                            Grid.Column="1"
+                            Text="📝 Примеры SQL"
+                            Clicked="OnShowSqlExamplesClicked"
+                            BackgroundColor="#2196F3"
+                            TextColor="White"
+                            CornerRadius="8"/>
+
+                        <Button 
+                            Grid.Column="2"
                             Text="🗑️"
                             Clicked="OnClearSqlClicked"
                             BackgroundColor="#F44336"
                             TextColor="White"
                             CornerRadius="8"
                             WidthRequest="50"/>
-                    </HorizontalStackLayout>
+                    </Grid>
 
                     <Frame 
                         x:Name="SqlResultFrame"
