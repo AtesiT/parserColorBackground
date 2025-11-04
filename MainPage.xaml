@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="parserColorBackground.MainPage"
+             Title="Color Background Parser">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label 
+                Text="Управление приложением"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,0,0,10"/>
+
+            <!-- SQL Query TextField -->
+            <Frame 
+                BorderColor="LightGray"
+                CornerRadius="10"
+                Padding="10"
+                HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label 
+                        Text="SQL Запрос:"
+                        FontSize="16"
+                        FontAttributes="Bold"/>
+
+                    <Editor 
+                        x:Name="SqlQueryEditor"
+                        Placeholder="SELECT * FROM ColorOptions&#x0a;SELECT * FROM SplashOptions"
+                        HeightRequest="100"
+                        FontSize="14"
+                        AutoSize="TextChanges"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Button 
+                            Text="▶ Выполнить SQL"
+                            Clicked="OnExecuteSqlClicked"
+                            BackgroundColor="#9C27B0"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HorizontalOptions="FillAndExpand"/>
+
+                        <Button 
+                            Text="🗑️"
+                            Clicked="OnClearSqlClicked"
+                            BackgroundColor="#F44336"
+                            TextColor="White"
+                            CornerRadius="8"
+                            WidthRequest="50"/>
+                    </HorizontalStackLayout>
+
+                    <Frame 
+                        x:Name="SqlResultFrame"
+                        IsVisible="False"
+                        BorderColor="LightBlue"
+                        CornerRadius="5"
+                        Padding="10"
+                        BackgroundColor="#F0F8FF">
+                        <ScrollView MaximumHeightRequest="150">
+                            <Label 
+                                x:Name="SqlResultLabel"
+                                FontSize="12"
+                                FontFamily="Courier"
+                                TextColor="#333"/>
+                        </ScrollView>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Кнопки выбора -->
+            <Button 
+                x:Name="AlertButton"
+                Text="🎨 Выбрать цвет фона (Alert)"
+                FontSize="18"
+                Clicked="OnAlertButtonClicked"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="60"/>
+
+            <Button 
+                x:Name="SplashButton"
+                Text="🖼️ Выбрать заставку (Alert)"
+                FontSize="18"
+                Clicked="OnSplashButtonClicked"
+                BackgroundColor="#FF9800"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="60"/>
+
+            <Label 
+                x:Name="SelectedColorLabel"
+                Text="Цвет не выбран"
+                FontSize="16"
+                HorizontalOptions="Center"
+                TextColor="Gray"/>
+
+            <Label 
+                x:Name="SelectedSplashLabel"
+                Text="Заставка не выбрана"
+                FontSize="16"
+                HorizontalOptions="Center"
+                TextColor="Gray"/>
+
+            <!-- Предпросмотр -->
+            <Frame 
+                x:Name="PreviewFrame"
+                HeightRequest="200"
+                CornerRadius="15"
+                HasShadow="True"
+                BorderColor="LightGray">
+                <Label 
+                    Text="Предпросмотр фона"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontSize="18"/>
+            </Frame>
+
+            <!-- Переключатель режима просмотра -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label 
+                    Text="Режим просмотра:"
+                    FontSize="16"
+                    VerticalOptions="Center"/>
+                <Button 
+                    x:Name="ViewModeButton"
+                    Text="📸 Фоны"
+                    Clicked="OnViewModeClicked"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    CornerRadius="8"/>
+            </HorizontalStackLayout>
+
+            <!-- Список изображений -->
+            <Label 
+                x:Name="CollectionTitleLabel"
+                Text="Изображения фонов"
+                FontSize="18"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,10,0,0"/>
+
+            <CollectionView 
+                x:Name="ImagesCollectionView"
+                SelectionMode="Single"
+                SelectionChanged="OnImageSelected">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="5" CornerRadius="10" HasShadow="True">
+                            <Grid>
+                                <Image 
+                                    Source="{Binding ImageUrl}"
+                                    Aspect="AspectFill"
+                                    HeightRequest="150"/>
+                                <Label 
+                                    Text="{Binding Title}"
+                                    BackgroundColor="#80000000"
+                                    TextColor="White"
+                                    Padding="10,5"
+                                    FontSize="14"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="Fill"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <ActivityIndicator 
+                x:Name="LoadingIndicator"
+                IsRunning="False"
+                IsVisible="False"
+                Color="{StaticResource Primary}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

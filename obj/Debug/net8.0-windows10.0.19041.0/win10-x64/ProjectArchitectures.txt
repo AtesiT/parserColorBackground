@@ -1,0 +1,1 @@
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\parserColorBackground.csproj;x64
