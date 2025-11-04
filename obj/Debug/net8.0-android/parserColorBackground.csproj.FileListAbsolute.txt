@@ -1053,3 +1053,4 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-andro
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-android\stamp\_GenerateJavaStubs.stamp
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-android\stamp\_GeneratePackageManagerJava.stamp
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-android\stamp\_ResolveLibraryProjectImports.stamp
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-android\parserColorBackground.sourcelink.json

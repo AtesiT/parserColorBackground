@@ -8,6 +8,8 @@ namespace parserColorBackground.Services
         private readonly SQLiteAsyncConnection _database;
         private const string CURRENT_SPLASH_KEY = "CurrentSplash";
         private const string CURRENT_COLOR_KEY = "CurrentColor";
+        private const string CURRENT_BACKGROUND_IMAGE_KEY = "CurrentBackgroundImage";
+        private const string CURRENT_SPLASH_IMAGE_KEY = "CurrentSplashImage";
 
         public DatabaseService()
         {
@@ -15,6 +17,7 @@ namespace parserColorBackground.Services
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<ColorOption>().Wait();
             _database.CreateTableAsync<SplashOption>().Wait();
+            _database.CreateTableAsync<SavedBackground>().Wait();
             InitializeDefaultColors();
             InitializeDefaultSplashes();
         }
@@ -130,6 +133,68 @@ namespace parserColorBackground.Services
 
         #endregion
 
+        #region SavedBackground Methods
+
+        public async Task SaveCurrentBackgroundAsync(string imageUrl, string colorName)
+        {
+            try
+            {
+                var allBackgrounds = await _database.Table<SavedBackground>().ToListAsync();
+                foreach (var bg in allBackgrounds)
+                {
+                    bg.IsCurrent = false;
+                    await _database.UpdateAsync(bg);
+                }
+
+                var newBackground = new SavedBackground
+                {
+                    ImageUrl = imageUrl,
+                    ColorName = colorName,
+                    IsCurrent = true,
+                    SavedAt = DateTime.Now
+                };
+
+                await _database.InsertAsync(newBackground);
+
+                Preferences.Default.Set(CURRENT_BACKGROUND_IMAGE_KEY, imageUrl);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving background: {ex.Message}");
+            }
+        }
+
+        public async Task<SavedBackground> GetCurrentBackgroundAsync()
+        {
+            try
+            {
+                var current = await _database.Table<SavedBackground>()
+                                             .Where(b => b.IsCurrent)
+                                             .FirstOrDefaultAsync();
+                return current;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting current background: {ex.Message}");
+                return null;
+            }
+        }
+
+        public string GetCurrentBackgroundImageUrl()
+        {
+            try
+            {
+                return Preferences.Default.Get(CURRENT_BACKGROUND_IMAGE_KEY, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting background image url: {ex.Message}");
+                return string.Empty;
+            }
+        }
+
+        #endregion
+
         #region SQL Execution
 
         public async Task<string> ExecuteRawSqlAsync(string sql)
@@ -151,9 +216,14 @@ namespace parserColorBackground.Services
                         var result = await _database.QueryAsync<SplashOption>(sql);
                         return FormatQueryResult(result);
                     }
+                    else if (sqlLower.Contains("savedbackgrounds"))
+                    {
+                        var result = await _database.QueryAsync<SavedBackground>(sql);
+                        return FormatQueryResult(result);
+                    }
                     else
                     {
-                        return "❌ Неизвестная таблица.\n\nДоступные таблицы:\n- ColorOptions\n- SplashOptions";
+                        return "❌ Неизвестная таблица.\n\nДоступные таблицы:\n- ColorOptions\n- SplashOptions\n- SavedBackgrounds";
                     }
                 }
                 else if (sqlLower.StartsWith("insert") || sqlLower.StartsWith("update") || sqlLower.StartsWith("delete"))
@@ -193,6 +263,14 @@ namespace parserColorBackground.Services
                     output += $"   Название: {splash.SplashName}\n";
                     output += $"   URL: {splash.ImageUrl}\n";
                     output += $"   Активен: {(splash.IsActive ? "✓" : "✗")}\n\n";
+                }
+                else if (item is SavedBackground background)
+                {
+                    output += $"🌄 ID: {background.Id}\n";
+                    output += $"   Цвет: {background.ColorName}\n";
+                    output += $"   URL: {background.ImageUrl}\n";
+                    output += $"   Текущий: {(background.IsCurrent ? "✓" : "✗")}\n";
+                    output += $"   Сохранен: {background.SavedAt:dd.MM.yyyy HH:mm}\n\n";
                 }
             }
 
@@ -254,6 +332,32 @@ namespace parserColorBackground.Services
             }
         }
 
+        // Новые методы для сохранения конкретного изображения заставки
+        public void SetCurrentSplashImageUrl(string imageUrl)
+        {
+            try
+            {
+                Preferences.Default.Set(CURRENT_SPLASH_IMAGE_KEY, imageUrl);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error setting current splash image: {ex.Message}");
+            }
+        }
+
+        public string GetCurrentSplashImageUrl()
+        {
+            try
+            {
+                return Preferences.Default.Get(CURRENT_SPLASH_IMAGE_KEY, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting current splash image: {ex.Message}");
+                return string.Empty;
+            }
+        }
+
         public void SetCurrentColor(string colorName)
         {
             try
@@ -279,66 +383,18 @@ namespace parserColorBackground.Services
             }
         }
 
-        public async Task<ColorOption> GetCurrentColorAsync()
-        {
-            try
-            {
-                var savedColorName = GetCurrentColor();
-
-                if (!string.IsNullOrEmpty(savedColorName))
-                {
-                    var savedColor = await _database.Table<ColorOption>()
-                                                    .Where(c => c.ColorName == savedColorName && c.IsActive)
-                                                    .FirstOrDefaultAsync();
-
-                    if (savedColor != null)
-                        return savedColor;
-                }
-
-                var colors = await GetActiveColorsAsync();
-                return colors.FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error getting current color: {ex.Message}");
-                return null;
-            }
-        }
-
         public void ClearPreferences()
         {
             try
             {
                 Preferences.Default.Remove(CURRENT_SPLASH_KEY);
                 Preferences.Default.Remove(CURRENT_COLOR_KEY);
+                Preferences.Default.Remove(CURRENT_BACKGROUND_IMAGE_KEY);
+                Preferences.Default.Remove(CURRENT_SPLASH_IMAGE_KEY);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error clearing preferences: {ex.Message}");
-            }
-        }
-
-        public void ClearCurrentSplash()
-        {
-            try
-            {
-                Preferences.Default.Remove(CURRENT_SPLASH_KEY);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error clearing current splash: {ex.Message}");
-            }
-        }
-
-        public void ClearCurrentColor()
-        {
-            try
-            {
-                Preferences.Default.Remove(CURRENT_COLOR_KEY);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error clearing current color: {ex.Message}");
             }
         }
 

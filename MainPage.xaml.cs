@@ -9,6 +9,7 @@ namespace parserColorBackground
         private readonly ImageParserService _imageParserService;
         private readonly JintService _jintService;
         private bool _isShowingSplashes = false;
+        private string _currentSelectedImageUrl = string.Empty;
 
         public MainPage()
         {
@@ -30,16 +31,29 @@ namespace parserColorBackground
         {
             try
             {
-                // Загружаем сохраненный цвет
-                var savedColor = _databaseService.GetCurrentColor();
-                if (!string.IsNullOrEmpty(savedColor))
-                {
-                    var color = GetColorFromName(savedColor);
-                    this.BackgroundColor = color;
-                    SelectedColorLabel.Text = $"Текущий цвет: {savedColor}";
+                // Загружаем сохраненный фон с изображением
+                var savedBackground = await _databaseService.GetCurrentBackgroundAsync();
 
-                    var contrastColor = GetContrastColor(color);
-                    UpdateTextColors(contrastColor);
+                if (savedBackground != null && !string.IsNullOrEmpty(savedBackground.ImageUrl))
+                {
+                    // Устанавливаем изображение как фон
+                    this.BackgroundImageSource = ImageSource.FromUri(new Uri(savedBackground.ImageUrl));
+                    SelectedColorLabel.Text = $"Текущий фон: {savedBackground.ColorName}";
+                    _currentSelectedImageUrl = savedBackground.ImageUrl;
+                }
+                else
+                {
+                    // Загружаем только цвет, если нет изображения
+                    var savedColor = _databaseService.GetCurrentColor();
+                    if (!string.IsNullOrEmpty(savedColor))
+                    {
+                        var color = GetColorFromName(savedColor);
+                        this.BackgroundColor = color;
+                        SelectedColorLabel.Text = $"Текущий цвет: {savedColor}";
+
+                        var contrastColor = GetContrastColor(color);
+                        UpdateTextColors(contrastColor);
+                    }
                 }
 
                 // Загружаем сохраненную заставку
@@ -123,13 +137,23 @@ namespace parserColorBackground
                 LoadingIndicator.IsRunning = true;
 
                 var splashes = await _databaseService.GetActiveSplashesAsync();
+                var imageItems = new List<ImageItem>();
 
-                var imageItems = splashes.Select(s => new ImageItem
+                foreach (var splash in splashes)
                 {
-                    Title = s.SplashName,
-                    ImageUrl = s.ImageUrl,
-                    Type = "Splash"
-                }).ToList();
+                    // Парсим изображения для каждой заставки
+                    var urls = await _imageParserService.ParseSplashImages(splash.SplashName, 3);
+
+                    foreach (var url in urls)
+                    {
+                        imageItems.Add(new ImageItem
+                        {
+                            Title = splash.SplashName,
+                            ImageUrl = url,
+                            Type = "Splash"
+                        });
+                    }
+                }
 
                 ImagesCollectionView.ItemsSource = imageItems;
             }
@@ -233,30 +257,47 @@ namespace parserColorBackground
 
                 SelectedSplashLabel.Text = $"Выбрана заставка: {splashName}";
 
-                // Сохраняем выбор
                 _databaseService.SetCurrentSplashAsync(splashName);
 
                 var splashes = await _databaseService.GetActiveSplashesAsync();
                 var selectedSplash = splashes.FirstOrDefault(s => s.SplashName == splashName);
 
-                if (selectedSplash != null && !string.IsNullOrEmpty(selectedSplash.ImageUrl))
+                if (selectedSplash != null)
                 {
-                    var splashImage = new Image
+                    // Парсим изображения для выбранной заставки
+                    var urls = await _imageParserService.ParseSplashImages(splashName, 5);
+
+                    if (urls.Count > 0)
                     {
-                        Source = ImageSource.FromUri(new Uri(selectedSplash.ImageUrl)),
-                        Aspect = Aspect.AspectFill
-                    };
-                    PreviewFrame.Content = splashImage;
+                        // Сохраняем первое изображение как текущую заставку
+                        _databaseService.SetCurrentSplashImageUrl(urls[0]);
 
-                    // Автоматически переключаемся на режим просмотра заставок
-                    _isShowingSplashes = true;
-                    ViewModeButton.Text = "🖼️ Заставки";
-                    CollectionTitleLabel.Text = "Доступные заставки";
-                    await LoadSplashesPreview();
+                        var splashImage = new Image
+                        {
+                            Source = ImageSource.FromUri(new Uri(urls[0])),
+                            Aspect = Aspect.AspectFill
+                        };
+                        PreviewFrame.Content = splashImage;
 
-                    await DisplayAlert("Успех",
-                        $"✅ Заставка '{splashName}' сохранена!\n\nОна будет отображаться при следующем запуске приложения",
-                        "OK");
+                        // Автоматически переключаемся на режим просмотра заставок
+                        _isShowingSplashes = true;
+                        ViewModeButton.Text = "🖼️ Заставки";
+                        CollectionTitleLabel.Text = "Доступные заставки";
+
+                        // Показываем все найденные варианты
+                        var imageItems = urls.Select((url, index) => new ImageItem
+                        {
+                            Title = $"{splashName} - вариант {index + 1}",
+                            ImageUrl = url,
+                            Type = "Splash"
+                        }).ToList();
+
+                        ImagesCollectionView.ItemsSource = imageItems;
+
+                        await DisplayAlert("Успех",
+                            $"✅ Заставка '{splashName}' сохранена!\n\n📸 Найдено {urls.Count} вариантов изображений.\n\n💡 Выберите понравившееся из списка ниже.\n\nОна будет отображаться при следующем запуске приложения",
+                            "OK");
+                    }
                 }
             }
             catch (Exception ex)
@@ -284,7 +325,6 @@ namespace parserColorBackground
 
                 var selectedColor = GetColorFromName(colorName);
 
-                // Сохраняем выбранный цвет
                 _databaseService.SetCurrentColor(colorName);
 
                 await AnimateBackgroundColor(selectedColor);
@@ -293,7 +333,6 @@ namespace parserColorBackground
 
                 if (imageUrls.Count > 0)
                 {
-                    // Создаем ImageItem для отображения
                     var imageItems = imageUrls.Select((url, index) => new ImageItem
                     {
                         Title = $"{colorName} - фон {index + 1}",
@@ -303,7 +342,6 @@ namespace parserColorBackground
 
                     ImagesCollectionView.ItemsSource = imageItems;
 
-                    // Переключаемся в режим фонов
                     _isShowingSplashes = false;
                     ViewModeButton.Text = "📸 Фоны";
                     CollectionTitleLabel.Text = "Изображения фонов";
@@ -318,7 +356,7 @@ namespace parserColorBackground
                     PreviewFrame.Content = firstImage;
 
                     await DisplayAlert("Успех",
-                        $"✅ Найдено {imageUrls.Count} изображений для цвета '{colorName}'\n\nЦвет сохранен и будет применяться при запуске",
+                        $"✅ Найдено {imageUrls.Count} изображений для цвета '{colorName}'\n\n💡 Выберите изображение из списка, чтобы установить его как фон",
                         "OK");
                 }
                 else
@@ -373,7 +411,7 @@ namespace parserColorBackground
             CollectionTitleLabel.TextColor = textColor;
         }
 
-        private void OnImageSelected(object sender, SelectionChangedEventArgs e)
+        private async void OnImageSelected(object sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection.FirstOrDefault() is ImageItem imageItem)
             {
@@ -389,12 +427,30 @@ namespace parserColorBackground
 
                     if (imageItem.Type == "Color")
                     {
+                        // Сохраняем выбранное изображение как текущий фон
                         this.BackgroundImageSource = ImageSource.FromUri(new Uri(imageItem.ImageUrl));
+                        _currentSelectedImageUrl = imageItem.ImageUrl;
+
+                        var colorName = _databaseService.GetCurrentColor();
+                        await _databaseService.SaveCurrentBackgroundAsync(imageItem.ImageUrl, colorName);
+
+                        await DisplayAlert("Сохранено",
+                            $"✅ Фон установлен!\n\nЭтот фон будет отображаться при следующем запуске приложения",
+                            "OK");
+                    }
+                    else if (imageItem.Type == "Splash")
+                    {
+                        // Сохраняем выбранное изображение как заставку
+                        _databaseService.SetCurrentSplashImageUrl(imageItem.ImageUrl);
+
+                        await DisplayAlert("Сохранено",
+                            $"✅ Заставка установлена!\n\n🎬 Эта заставка будет показываться при запуске приложения (2-3 секунды)",
+                            "OK");
                     }
                 }
                 catch (Exception ex)
                 {
-                    DisplayAlert("Ошибка", $"Не удалось загрузить изображение: {ex.Message}", "OK");
+                    await DisplayAlert("Ошибка", $"Не удалось загрузить изображение: {ex.Message}", "OK");
                 }
             }
         }

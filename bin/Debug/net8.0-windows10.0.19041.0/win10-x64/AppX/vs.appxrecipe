@@ -30,7 +30,7 @@
     <AppXManifest Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-11-04T08:36:13.239</Modified>
+      <Modified>2025-11-04T09:07:51.361</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.dll">
       <PackagePath>parserColorBackground.dll</PackagePath>
-      <Modified>2025-11-04T08:36:12.409</Modified>
+      <Modified>2025-11-04T09:07:50.711</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>parserColorBackground.exe</PackagePath>
-      <Modified>2025-11-04T08:36:12.434</Modified>
+      <Modified>2025-11-04T09:07:50.711</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>

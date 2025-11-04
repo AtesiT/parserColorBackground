@@ -3,32 +3,40 @@
   "WorkspaceRootPath": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\models\\imageitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:models\\imageitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\splashpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:splashpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:services\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\models\\savedbackground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:models\\savedbackground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\services\\imageparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:services\\imageparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\models\\imageitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:models\\imageitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\splashpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:splashpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\splashpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -45,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\services\\imageparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|solutionrelative:services\\imageparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB999286-8153-43AF-88FC-9D1A71E79196}|parserColorBackground.csproj|d:\\keys and documents\\labs\\4 course\\parsercolorbackground\\models\\coloroption.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,7 +82,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "SplashOption.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Models\\SplashOption.cs",
               "RelativeDocumentMoniker": "Models\\SplashOption.cs",
@@ -86,8 +90,7 @@
               "RelativeToolTip": "Models\\SplashOption.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:22:05.138Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:22:05.138Z"
             },
             {
               "$type": "Document",
@@ -97,14 +100,14 @@
               "RelativeDocumentMoniker": "MainPage.xaml.cs",
               "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs",
               "RelativeToolTip": "MainPage.xaml.cs",
-              "ViewState": "AgIAAKQBAAAAAAAAAAA6wKoBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAKsBAAAAAAAAAAAUwMcBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T08:01:39.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "AppShell.xaml",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\AppShell.xaml",
               "RelativeDocumentMoniker": "AppShell.xaml",
@@ -112,25 +115,50 @@
               "RelativeToolTip": "AppShell.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-04T08:23:40.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:23:40.574Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T08:02:01.846Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SavedBackground.cs",
+              "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Models\\SavedBackground.cs",
+              "RelativeDocumentMoniker": "Models\\SavedBackground.cs",
+              "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Models\\SavedBackground.cs",
+              "RelativeToolTip": "Models\\SavedBackground.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T08:58:42.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "DatabaseService.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\DatabaseService.cs",
               "RelativeDocumentMoniker": "Services\\DatabaseService.cs",
               "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\DatabaseService.cs",
               "RelativeToolTip": "Services\\DatabaseService.cs",
-              "ViewState": "AgIAAD8BAAAAAAAAAAAswFoBAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHYBAAAAAAAAAAAUwJIBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T08:00:48.268Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "SplashPage.xaml",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\SplashPage.xaml",
               "RelativeDocumentMoniker": "SplashPage.xaml",
@@ -138,12 +166,11 @@
               "RelativeToolTip": "SplashPage.xaml",
               "ViewState": "AgIAAB4AAAAAAAAAAAD4vywAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-11-04T08:23:04.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:23:04.433Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MauiProgram.cs",
               "RelativeDocumentMoniker": "MauiProgram.cs",
@@ -151,25 +178,11 @@
               "RelativeToolTip": "MauiProgram.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAUwBMAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:02:09.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:02:09.19Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\App.xaml.cs",
-              "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\App.xaml.cs",
-              "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAUwBAAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:02:01.846Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml",
               "RelativeDocumentMoniker": "MainPage.xaml",
@@ -182,20 +195,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "SplashPage.xaml.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\SplashPage.xaml.cs",
               "RelativeDocumentMoniker": "SplashPage.xaml.cs",
               "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\SplashPage.xaml.cs",
               "RelativeToolTip": "SplashPage.xaml.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAUwD0AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAUwE8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-04T08:23:06.763Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
+              "Title": "ImageParserService.cs",
+              "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\ImageParserService.cs",
+              "RelativeDocumentMoniker": "Services\\ImageParserService.cs",
+              "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\ImageParserService.cs",
+              "RelativeToolTip": "Services\\ImageParserService.cs",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAUwL8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T08:01:02.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ImageItem.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Models\\ImageItem.cs",
               "RelativeDocumentMoniker": "Models\\ImageItem.cs",
@@ -203,12 +229,11 @@
               "RelativeToolTip": "Models\\ImageItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:33:49.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:33:49.953Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "JintService.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\JintService.cs",
               "RelativeDocumentMoniker": "Services\\JintService.cs",
@@ -216,25 +241,11 @@
               "RelativeToolTip": "Services\\JintService.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAUwC4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:01:16.569Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:01:16.569Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ImageParserService.cs",
-              "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\ImageParserService.cs",
-              "RelativeDocumentMoniker": "Services\\ImageParserService.cs",
-              "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Services\\ImageParserService.cs",
-              "RelativeToolTip": "Services\\ImageParserService.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAUwFcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:01:02.737Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ColorOption.cs",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\Models\\ColorOption.cs",
               "RelativeDocumentMoniker": "Models\\ColorOption.cs",
@@ -242,21 +253,19 @@
               "RelativeToolTip": "Models\\ColorOption.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-04T08:00:34.078Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:00:34.078Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "parserColorBackground",
+              "DocumentIndex": 14,
+              "Title": "parserColorBackground.csproj",
               "DocumentMoniker": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\parserColorBackground.csproj",
               "RelativeDocumentMoniker": "parserColorBackground.csproj",
               "ToolTip": "D:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\parserColorBackground.csproj",
               "RelativeToolTip": "parserColorBackground.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-04T08:00:03.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-04T08:00:03.652Z"
             }
           ]
         }

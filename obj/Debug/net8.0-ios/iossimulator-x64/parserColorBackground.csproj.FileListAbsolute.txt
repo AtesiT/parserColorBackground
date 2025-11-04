@@ -319,3 +319,4 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-ios\i
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-ios\iossimulator-x64\parserColorBackground.pdb
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-ios\iossimulator-x64\parserColorBackground.genruntimeconfig.cache
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-ios\iossimulator-x64\ref\parserColorBackground.dll
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-ios\iossimulator-x64\parserColorBackground.sourcelink.json
