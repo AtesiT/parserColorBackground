@@ -30,25 +30,25 @@
     <AppXManifest Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-11-06T16:41:04.228</Modified>
+      <Modified>2025-11-07T15:04:18.026</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-11-04T09:33:50.251</Modified>
+      <Modified>2025-11-07T09:12:01.010</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.runtimeconfig.json">
       <PackagePath>parserColorBackground.runtimeconfig.json</PackagePath>
-      <Modified>2025-11-04T08:05:00.302</Modified>
+      <Modified>2025-11-07T09:25:06.662</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.dll">
       <PackagePath>parserColorBackground.dll</PackagePath>
-      <Modified>2025-11-06T16:41:01.552</Modified>
+      <Modified>2025-11-07T15:04:16.208</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>parserColorBackground.exe</PackagePath>
-      <Modified>2025-11-06T16:41:02.067</Modified>
+      <Modified>2025-11-07T15:04:16.465</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -56,23 +56,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:06.092</Modified>
+      <Modified>2025-11-07T09:11:57.682</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:06.109</Modified>
+      <Modified>2025-11-07T09:11:57.699</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:06.141</Modified>
+      <Modified>2025-11-07T09:11:57.721</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:06.176</Modified>
+      <Modified>2025-11-07T09:11:57.754</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:06.309</Modified>
+      <Modified>2025-11-07T09:11:57.880</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
@@ -84,211 +84,211 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2025-11-04T07:48:07.130</Modified>
+      <Modified>2025-11-07T09:11:58.676</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.122</Modified>
+      <Modified>2025-11-07T09:11:58.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.122</Modified>
+      <Modified>2025-11-07T09:11:58.666</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.122</Modified>
+      <Modified>2025-11-07T09:11:58.666</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.121</Modified>
+      <Modified>2025-11-07T09:11:58.666</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.121</Modified>
+      <Modified>2025-11-07T09:11:58.665</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.127</Modified>
+      <Modified>2025-11-07T09:11:58.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.127</Modified>
+      <Modified>2025-11-07T09:11:58.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.126</Modified>
+      <Modified>2025-11-07T09:11:58.671</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.127</Modified>
+      <Modified>2025-11-07T09:11:58.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.126</Modified>
+      <Modified>2025-11-07T09:11:58.671</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.128</Modified>
+      <Modified>2025-11-07T09:11:58.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.128</Modified>
+      <Modified>2025-11-07T09:11:58.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.127</Modified>
+      <Modified>2025-11-07T09:11:58.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.127</Modified>
+      <Modified>2025-11-07T09:11:58.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.127</Modified>
+      <Modified>2025-11-07T09:11:58.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.129</Modified>
+      <Modified>2025-11-07T09:11:58.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.129</Modified>
+      <Modified>2025-11-07T09:11:58.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.129</Modified>
+      <Modified>2025-11-07T09:11:58.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.129</Modified>
+      <Modified>2025-11-07T09:11:58.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.129</Modified>
+      <Modified>2025-11-07T09:11:58.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.129</Modified>
+      <Modified>2025-11-07T09:11:58.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.128</Modified>
+      <Modified>2025-11-07T09:11:58.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.128</Modified>
+      <Modified>2025-11-07T09:11:58.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.128</Modified>
+      <Modified>2025-11-07T09:11:58.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.128</Modified>
+      <Modified>2025-11-07T09:11:58.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.124</Modified>
+      <Modified>2025-11-07T09:11:58.669</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.124</Modified>
+      <Modified>2025-11-07T09:11:58.669</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.123</Modified>
+      <Modified>2025-11-07T09:11:58.668</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.123</Modified>
+      <Modified>2025-11-07T09:11:58.668</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.123</Modified>
+      <Modified>2025-11-07T09:11:58.668</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.670</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.670</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.669</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.669</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.669</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.126</Modified>
+      <Modified>2025-11-07T09:11:58.671</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.126</Modified>
+      <Modified>2025-11-07T09:11:58.671</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.126</Modified>
+      <Modified>2025-11-07T09:11:58.671</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.670</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.125</Modified>
+      <Modified>2025-11-07T09:11:58.670</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.123</Modified>
+      <Modified>2025-11-07T09:11:58.668</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.123</Modified>
+      <Modified>2025-11-07T09:11:58.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.122</Modified>
+      <Modified>2025-11-07T09:11:58.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.122</Modified>
+      <Modified>2025-11-07T09:11:58.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.122</Modified>
+      <Modified>2025-11-07T09:11:58.667</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.130</Modified>
+      <Modified>2025-11-07T09:11:58.677</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.130</Modified>
+      <Modified>2025-11-07T09:11:58.677</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.130</Modified>
+      <Modified>2025-11-07T09:11:58.676</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.130</Modified>
+      <Modified>2025-11-07T09:11:58.676</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2025-11-04T07:48:07.130</Modified>
+      <Modified>2025-11-07T09:11:58.676</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.deps.json">
       <PackagePath>parserColorBackground.deps.json</PackagePath>
-      <Modified>2025-11-04T09:33:49.952</Modified>
+      <Modified>2025-11-07T09:25:06.660</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.57\lib\net8.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
