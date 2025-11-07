@@ -283,77 +283,112 @@ namespace parserColorBackground
         {
             try
             {
-                _jintService.ExecuteScript("log('➕ Добавление нового цвета фона...')");
+                _jintService.ExecuteScript("log('➕ Запуск мастера добавления цвета фона...')");
 
+                // Показываем Alert для ввода названия цвета
                 var result = await DisplayPromptAsync(
-                    "Новый цвет фона",
-                    "Введите название цвета (например: голубой, бирюзовый, малиновый):",
-                    "Добавить",
-                    "Отмена",
-                    placeholder: "Название цвета",
+                    "🎨 Новый цвет фона",
+                    "Введите название цвета для поиска в Google Images:",
+                    "🔍 Найти",
+                    "❌ Отмена",
+                    placeholder: "например: голубой, бирюзовый, малиновый",
                     maxLength: 50
                 );
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
-                    _jintService.ExecuteScript($"log('🔍 Проверка названия цвета: {result}')");
+                    // ШАГ 1: Валидация через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 1: Валидация названия «{result}»')");
 
                     bool isValid = _jintService.ValidateString(result);
 
                     if (!isValid)
                     {
-                        await DisplayAlert("Ошибка", "Название цвета должно содержать минимум 2 символа", "OK");
-                        _jintService.ExecuteScript($"warn('⚠️ Некорректное название: {result}')");
+                        _jintService.ExecuteScript($"error('❌ Валидация не пройдена: название слишком короткое')");
+                        await DisplayAlert("❌ Ошибка валидации",
+                            "Название цвета должно содержать минимум 2 символа",
+                            "OK");
                         return;
                     }
 
-                    _jintService.ExecuteScript($"info('✅ Название прошло валидацию: {result}')");
+                    _jintService.ExecuteScript($"info('✅ Валидация пройдена успешно')");
+
+                    // ШАГ 2: Проверка дубликатов через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 2: Проверка дубликатов в базе данных')");
 
                     var colors = await _databaseService.GetActiveColorsAsync();
                     _jintService.SetValue("existingColors", colors.Select(c => c.ColorName.ToLower()).ToArray());
                     _jintService.SetValue("newColor", result.ToLower());
 
                     var checkScript = @"
-                        var exists = false;
-                        for (var i = 0; i < existingColors.length; i++) {
-                            if (existingColors[i] === newColor) {
-                                exists = true;
-                                break;
-                            }
-                        }
-                        exists;
-                    ";
+                log('🔍 Поиск дубликатов...');
+                var exists = false;
+                var foundAt = -1;
+                
+                for (var i = 0; i < existingColors.length; i++) {
+                    if (existingColors[i] === newColor) {
+                        exists = true;
+                        foundAt = i;
+                        break;
+                    }
+                }
+                
+                if (exists) {
+                    warn('⚠️ Найден дубликат на позиции: ' + foundAt);
+                } else {
+                    info('✅ Дубликатов не найдено');
+                }
+                
+                exists;
+            ";
 
                     var existsResult = _jintService.ExecuteScript(checkScript);
                     bool exists = existsResult.Equals("true", StringComparison.OrdinalIgnoreCase);
 
                     if (exists)
                     {
-                        await DisplayAlert("Внимание",
-                            $"Цвет '{result}' уже существует в базе данных!",
+                        await DisplayAlert("⚠️ Дубликат найден",
+                            $"Цвет «{result}» уже существует в базе данных!",
                             "OK");
-                        _jintService.ExecuteScript($"warn('⚠️ Цвет уже существует: {result}')");
                         return;
                     }
 
+                    // ШАГ 3: Построение поискового запроса через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 3: Построение Google поискового запроса')");
+
+                    var googleQuery = _jintService.BuildSearchQuery(result, "color");
+
+                    _jintService.ExecuteScript($"info('🌐 Google запрос: «{googleQuery}»')");
+
+                    // ШАГ 4: Парсинг изображений
                     LoadingIndicator.IsVisible = true;
                     LoadingIndicator.IsRunning = true;
 
-                    await _databaseService.AddColorAsync(new ColorOption
-                    {
-                        ColorName = result,
-                        IsActive = true
-                    });
+                    _jintService.ExecuteScript($"log('📝 ШАГ 4: Запуск парсинга Google Images')");
+                    _jintService.ExecuteScript($"log('🌐 URL: https://www.google.com/search?q={Uri.EscapeDataString(googleQuery)}&tbm=isch')");
 
-                    _jintService.ExecuteScript($"info('✅ Цвет добавлен в БД: {result}')");
+                    var urls = await _imageParserService.ParseGoogleImages(result, 10);
 
-                    _jintService.ExecuteScript($"log('🔍 Поиск изображений для цвета: {result}')");
-                    var urls = await _imageParserService.ParseGoogleImages(result, 5);
+                    // ШАГ 5: Анализ результатов через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 5: Анализ результатов парсинга')");
+
+                    var analysisMessage = _jintService.AnalyzeParsingResults(urls.Count, result);
 
                     if (urls.Count > 0)
                     {
-                        _jintService.SetValue("imageCount", urls.Count);
-                        _jintService.ExecuteScript("info('🖼️ Найдено изображений: ' + imageCount)");
+                        // ШАГ 6: Сохранение в БД
+                        _jintService.ExecuteScript($"log('📝 ШАГ 6: Сохранение в базу данных')");
+
+                        await _databaseService.AddColorAsync(new ColorOption
+                        {
+                            ColorName = result,
+                            IsActive = true
+                        });
+
+                        _jintService.ExecuteScript($"info('✅ Цвет «{result}» успешно добавлен в БД')");
+
+                        // ШАГ 7: Отображение preview
+                        _jintService.ExecuteScript($"log('📝 ШАГ 7: Отображение предпросмотра')");
 
                         var previewImage = new Image
                         {
@@ -362,16 +397,26 @@ namespace parserColorBackground
                         };
                         PreviewFrame.Content = previewImage;
 
-                        await DisplayAlert("Успех",
-                            $"✅ Цвет '{result}' успешно добавлен!\n\n🖼️ Найдено {urls.Count} фоновых изображений.\n\nТеперь вы можете выбрать его через кнопку 'Выбрать цвет фона'",
+                        _jintService.ExecuteScript("info('✅ ВСЕ ШАГИ ЗАВЕРШЕНЫ УСПЕШНО!')");
+
+                        await DisplayAlert("✅ Успех!",
+                            $"Цвет «{result}» успешно добавлен!\n\n" +
+                            $"🖼️ Найдено изображений: {urls.Count}\n" +
+                            $"🔍 Поисковый запрос: {googleQuery}\n\n" +
+                            $"💡 Теперь вы можете выбрать его через кнопку «Выбрать цвет фона»",
                             "OK");
                     }
                     else
                     {
-                        _jintService.ExecuteScript($"warn('⚠️ Изображения не найдены для: {result}')");
+                        _jintService.ExecuteScript("error('❌ Парсинг не дал результатов')");
 
-                        await DisplayAlert("Внимание",
-                            $"Цвет '{result}' добавлен, но изображения не Серьезность\tКод\tОписание\tПроект\tФайл\tСтрока\tСостояние подавления\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t363\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t507\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t564\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t639\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t646\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t660\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t663\t\r\nОшибка (активно)\tCS0103\tИмя \"PreviewFrame\" не существует в текущем контексте.\tparserColorBackground (net8.0-android), parserColorBackground (net8.0-ios), parserColorBackground (net8.0-maccatalyst), parserColorBackground (net8.0-windows10.0.19041.0)\tD:\\Keys And Documents\\Labs\\4 Course\\parserColorBackground\\MainPage.xaml.cs\t721\t\r\n.\n\nПопробуйте другое название или проверьте подключение к интернету.",
+                        await DisplayAlert("⚠️ Предупреждение",
+                            $"Цвет «{result}» добавлен, но изображения не найдены.\n\n" +
+                            $"🔍 Запрос: {googleQuery}\n\n" +
+                            $"Попробуйте:\n" +
+                            $"• Другое название\n" +
+                            $"• Проверить интернет-соединение\n" +
+                            $"• Использовать английское название",
                             "OK");
                     }
                 }
@@ -382,8 +427,8 @@ namespace parserColorBackground
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Не удалось добавить цвет: {ex.Message}", "OK");
-                _jintService.ExecuteScript($"error('❌ Ошибка добавления цвета: {ex.Message}')");
+                _jintService.ExecuteScript($"error('❌ КРИТИЧЕСКАЯ ОШИБКА: {ex.Message}')");
+                await DisplayAlert("❌ Ошибка", $"Не удалось добавить цвет: {ex.Message}", "OK");
             }
             finally
             {
@@ -448,56 +493,84 @@ namespace parserColorBackground
         {
             try
             {
-                _jintService.ExecuteScript("log('➕ Добавление новой заставки...')");
+                _jintService.ExecuteScript("log('➕ Запуск мастера добавления заставки...')");
 
+                // Показываем Alert для ввода названия заставки
                 var result = await DisplayPromptAsync(
-                    "Новая заставка",
-                    "Введите название заставки (например: Деревня, Лес, Пляж, Закат):",
-                    "Добавить",
-                    "Отмена",
-                    placeholder: "Название заставки",
+                    "🖼️ Новая заставка",
+                    "Введите название темы для поиска wallpaper в Google:",
+                    "🔍 Найти",
+                    "❌ Отмена",
+                    placeholder: "например: Деревня, Лес, Пляж, Закат",
                     maxLength: 50
                 );
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
-                    _jintService.ExecuteScript($"log('🔍 Проверка названия заставки: {result}')");
+                    // ШАГ 1: Валидация через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 1: Валидация названия «{result}»')");
 
                     bool isValid = _jintService.ValidateString(result);
 
                     if (!isValid)
                     {
-                        await DisplayAlert("Ошибка", "Название заставки должно содержать минимум 2 символа", "OK");
-                        _jintService.ExecuteScript($"warn('⚠️ Некорректное название: {result}')");
+                        _jintService.ExecuteScript($"error('❌ Валидация не пройдена: название слишком короткое')");
+                        await DisplayAlert("❌ Ошибка валидации",
+                            "Название заставки должно содержать минимум 2 символа",
+                            "OK");
                         return;
                     }
 
-                    _jintService.ExecuteScript($"info('✅ Название прошло валидацию: {result}')");
+                    _jintService.ExecuteScript($"info('✅ Валидация пройдена успешно')");
+
+                    // ШАГ 2: Проверка дубликатов
+                    _jintService.ExecuteScript($"log('📝 ШАГ 2: Проверка дубликатов в базе данных')");
 
                     var exists = await _databaseService.SplashExistsAsync(result);
 
                     if (exists)
                     {
-                        await DisplayAlert("Внимание",
-                            $"Заставка '{result}' уже существует в базе данных!",
+                        _jintService.ExecuteScript($"warn('⚠️ Найден дубликат: {result}')");
+                        await DisplayAlert("⚠️ Дубликат найден",
+                            $"Заставка «{result}» уже существует в базе данных!",
                             "OK");
-                        _jintService.ExecuteScript($"warn('⚠️ Заставка уже существует: {result}')");
                         return;
                     }
 
+                    _jintService.ExecuteScript("info('✅ Дубликатов не найдено')");
+
+                    // ШАГ 3: Построение поискового запроса через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 3: Построение Google поискового запроса для wallpaper')");
+
+                    var googleQuery = _jintService.BuildSearchQuery(result, "wallpaper");
+
+                    _jintService.ExecuteScript($"info('🌐 Google запрос: «{googleQuery}»')");
+
+                    // ШАГ 4: Парсинг wallpaper
                     LoadingIndicator.IsVisible = true;
                     LoadingIndicator.IsRunning = true;
 
-                    await _databaseService.AddSplashByNameAsync(result);
-                    _jintService.ExecuteScript($"info('✅ Заставка добавлена в БД: {result}')");
+                    _jintService.ExecuteScript($"log('📝 ШАГ 4: Запуск парсинга HD wallpaper')");
+                    _jintService.ExecuteScript($"log('🌐 URL: https://www.google.com/search?q={Uri.EscapeDataString(googleQuery)}&tbm=isch&tbs=isz:l')");
 
-                    _jintService.ExecuteScript($"log('🔍 Поиск wallpaper для: {result}')");
-                    var urls = await _imageParserService.ParseHighQualityWallpapers(result, 3);
+                    var urls = await _imageParserService.ParseHighQualityWallpapers(result, 8);
+
+                    // ШАГ 5: Анализ результатов через JINT
+                    _jintService.ExecuteScript($"log('📝 ШАГ 5: Анализ результатов парсинга')");
+
+                    var analysisMessage = _jintService.AnalyzeParsingResults(urls.Count, result);
 
                     if (urls.Count > 0)
                     {
-                        _jintService.SetValue("wallpaperCount", urls.Count);
-                        _jintService.ExecuteScript("info('🖼️ Найдено wallpaper: ' + wallpaperCount)");
+                        // ШАГ 6: Сохранение в БД
+                        _jintService.ExecuteScript($"log('📝 ШАГ 6: Сохранение в базу данных')");
+
+                        await _databaseService.AddSplashByNameAsync(result);
+
+                        _jintService.ExecuteScript($"info('✅ Заставка «{result}» успешно добавлена в БД')");
+
+                        // ШАГ 7: Отображение preview
+                        _jintService.ExecuteScript($"log('📝 ШАГ 7: Отображение предпросмотра первого wallpaper')");
 
                         var previewImage = new Image
                         {
@@ -506,16 +579,26 @@ namespace parserColorBackground
                         };
                         PreviewFrame.Content = previewImage;
 
-                        await DisplayAlert("Успех",
-                            $"✅ Заставка '{result}' успешно добавлена!\n\n🖼️ Найдено {urls.Count} wallpaper.\n\nТеперь вы можете выбрать её через кнопку 'Выбрать заставку'",
+                        _jintService.ExecuteScript("info('✅ ВСЕ ШАГИ ЗАВЕРШЕНЫ УСПЕШНО!')");
+
+                        await DisplayAlert("✅ Успех!",
+                            $"Заставка «{result}» успешно добавлена!\n\n" +
+                            $"🖼️ Найдено HD wallpaper: {urls.Count}\n" +
+                            $"🔍 Поисковый запрос: {googleQuery}\n\n" +
+                            $"💡 Теперь вы можете выбрать её через кнопку «Выбрать заставку»",
                             "OK");
                     }
                     else
                     {
-                        _jintService.ExecuteScript($"warn('⚠️ Wallpaper не найдены для: {result}')");
+                        _jintService.ExecuteScript("error('❌ Парсинг не дал результатов')");
 
-                        await DisplayAlert("Внимание",
-                            $"Заставка '{result}' добавлена, но изображения не найдены.\n\nПопробуйте другое название или проверьте подключение к интернету.",
+                        await DisplayAlert("⚠️ Предупреждение",
+                            $"Заставка «{result}» добавлена, но wallpaper не найдены.\n\n" +
+                            $"🔍 Запрос: {googleQuery}\n\n" +
+                            $"Попробуйте:\n" +
+                            $"• Более конкретное название\n" +
+                            $"• Проверить интернет-соединение\n" +
+                            $"• Использовать популярные темы",
                             "OK");
                     }
                 }
@@ -526,8 +609,8 @@ namespace parserColorBackground
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", $"Не удалось добавить заставку: {ex.Message}", "OK");
-                _jintService.ExecuteScript($"error('❌ Ошибка добавления заставки: {ex.Message}')");
+                _jintService.ExecuteScript($"error('❌ КРИТИЧЕСКАЯ ОШИБКА: {ex.Message}')");
+                await DisplayAlert("❌ Ошибка", $"Не удалось добавить заставку: {ex.Message}", "OK");
             }
             finally
             {

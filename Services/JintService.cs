@@ -75,6 +75,33 @@ namespace parserColorBackground.Services
             {
                 return string.Join(", ", array);
             }));
+
+            // Новая функция: формирование Google поискового запроса
+            _engine.SetValue("buildGoogleQuery", new Func<string, string, string>((searchTerm, type) =>
+            {
+                // type: "color" или "wallpaper"
+                if (type == "color")
+                {
+                    return $"{searchTerm} background wallpaper 4k hd";
+                }
+                else if (type == "wallpaper")
+                {
+                    return $"{searchTerm} landscape wallpaper 4k hd desktop";
+                }
+                return searchTerm;
+            }));
+
+            // Новая функция: проверка качества поискового запроса
+            _engine.SetValue("validateSearchQuery", new Func<string, object>(query =>
+            {
+                var result = new
+                {
+                    isValid = query.Length >= 5,
+                    hasKeywords = query.Contains("wallpaper") || query.Contains("background"),
+                    quality = query.Contains("4k") || query.Contains("hd") ? "high" : "normal"
+                };
+                return result;
+            }));
         }
 
         public string ExecuteScript(string script)
@@ -100,10 +127,8 @@ namespace parserColorBackground.Services
                 SetValue("inputToValidate", input);
                 var result = ExecuteScript("validate(inputToValidate)");
 
-                // Логируем результат валидации
                 ExecuteScript($"log('Валидация \"{input}\": {result}')");
 
-                // Проверяем результат (может быть "true", "True", "1", true и т.д.)
                 return result.Equals("true", StringComparison.OrdinalIgnoreCase) ||
                        result == "True" ||
                        result == "1";
@@ -112,6 +137,71 @@ namespace parserColorBackground.Services
             {
                 ExecuteScript($"error('Ошибка валидации: {ex.Message}')");
                 return false;
+            }
+        }
+
+        // Новый метод: построение поискового запроса через JINT
+        public string BuildSearchQuery(string searchTerm, string type)
+        {
+            try
+            {
+                SetValue("searchTerm", searchTerm);
+                SetValue("type", type);
+
+                var script = @"
+                    var query = buildGoogleQuery(searchTerm, type);
+                    log('🔍 Построен поисковый запрос: ' + query);
+                    
+                    var validation = validateSearchQuery(query);
+                    if (validation.isValid) {
+                        info('✅ Запрос валиден. Качество: ' + validation.quality);
+                    } else {
+                        warn('⚠️ Запрос может быть недостаточно точным');
+                    }
+                    
+                    query;
+                ";
+
+                return ExecuteScript(script);
+            }
+            catch (Exception ex)
+            {
+                ExecuteScript($"error('Ошибка построения запроса: {ex.Message}')");
+                return searchTerm;
+            }
+        }
+
+        // Новый метод: анализ результатов парсинга
+        public string AnalyzeParsingResults(int foundCount, string searchTerm)
+        {
+            try
+            {
+                SetValue("foundCount", foundCount);
+                SetValue("searchTerm", searchTerm);
+
+                var script = @"
+                    var analysis = {
+                        success: foundCount > 0,
+                        quality: foundCount >= 5 ? 'отличное' : foundCount >= 3 ? 'хорошее' : 'удовлетворительное',
+                        recommendation: foundCount === 0 ? 'Попробуйте другое название' : 'Результат найден'
+                    };
+                    
+                    if (analysis.success) {
+                        info('✅ Найдено изображений: ' + foundCount + '. Качество: ' + analysis.quality);
+                    } else {
+                        warn('⚠️ Изображения не найдены. ' + analysis.recommendation);
+                    }
+                    
+                    var message = 'Для запроса «' + searchTerm + '» найдено: ' + foundCount + ' изображений';
+                    log(message);
+                    message;
+                ";
+
+                return ExecuteScript(script);
+            }
+            catch (Exception ex)
+            {
+                return $"Ошибка анализа: {ex.Message}";
             }
         }
 
