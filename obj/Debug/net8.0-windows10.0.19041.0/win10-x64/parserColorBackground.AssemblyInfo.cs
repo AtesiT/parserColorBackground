@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("parserColorBackground")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+f936973728afc499e8e5af4bd4865ac60e2e46da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+5c208cebb5e530931f1004304efc37aa6f65123f")]
 [assembly: System.Reflection.AssemblyProductAttribute("parserColorBackground")]
 [assembly: System.Reflection.AssemblyTitleAttribute("parserColorBackground")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

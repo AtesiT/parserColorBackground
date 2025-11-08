@@ -17,6 +17,7 @@ namespace parserColorBackground
             _databaseService = new DatabaseService();
             _imageParserService = new ImageParserService();
             _jintService = new JintService();
+            _imageParserService.SetJintService(_jintService);
 
             // Подписываемся на вывод консоли JINT
             _jintService.ConsoleOutput += OnJintConsoleOutput;
@@ -53,22 +54,50 @@ namespace parserColorBackground
 
                 var savedBackground = await _databaseService.GetCurrentBackgroundAsync();
 
+                _jintService.ExecuteScript($"log('📊 Проверка сохраненного фона: {savedBackground?.ImageUrl ?? "null"}')");
+
                 if (savedBackground != null && !string.IsNullOrEmpty(savedBackground.ImageUrl))
                 {
-                    this.BackgroundImageSource = ImageSource.FromUri(new Uri(savedBackground.ImageUrl));
-                    SelectedColorLabel.Text = $"Текущий фон: {savedBackground.ColorName}";
-                    _currentSelectedImageUrl = savedBackground.ImageUrl;
+                    _jintService.ExecuteScript($"log('🌐 Попытка загрузить фон: {savedBackground.ImageUrl}')");
 
-                    _jintService.ExecuteScript($"info('✅ Фон загружен: {savedBackground.ColorName}')");
+                    try
+                    {
+                        // ДИАГНОСТИКА: Проверяем платформу
+#if ANDROID
+                        _jintService.ExecuteScript("log('📱 Платформа: Android')");
+#elif WINDOWS
+                _jintService.ExecuteScript("log('🖥️ Платформа: Windows')");
+#endif
+
+                        this.BackgroundImageSource = ImageSource.FromUri(new Uri(savedBackground.ImageUrl));
+
+                        _jintService.ExecuteScript($"info('✅ BackgroundImageSource установлен')");
+
+                        SelectedColorLabel.Text = $"Текущий фон: {savedBackground.ColorName}";
+                        _currentSelectedImageUrl = savedBackground.ImageUrl;
+
+                        _jintService.ExecuteScript($"info('✅ Фон загружен: {savedBackground.ColorName}')");
+                    }
+                    catch (Exception imgEx)
+                    {
+                        _jintService.ExecuteScript($"error('❌ Ошибка загрузки изображения фона: {imgEx.Message}')");
+                    }
                 }
                 else
                 {
+                    _jintService.ExecuteScript("log('📝 Сохраненного фона нет, проверяем цвет...')");
+
                     var savedColor = _databaseService.GetCurrentColor();
+
+                    _jintService.ExecuteScript($"log('🎨 Сохраненный цвет: {savedColor ?? "null"}')");
+
                     if (!string.IsNullOrEmpty(savedColor))
                     {
                         var color = GetColorFromName(savedColor);
                         this.BackgroundColor = color;
                         SelectedColorLabel.Text = $"Текущий цвет: {savedColor}";
+
+                        _jintService.ExecuteScript($"info('✅ BackgroundColor установлен: {savedColor}')");
 
                         var contrastColor = GetContrastColor(color);
                         UpdateTextColors(contrastColor);
@@ -86,7 +115,8 @@ namespace parserColorBackground
             }
             catch (Exception ex)
             {
-                _jintService.ExecuteScript($"error('❌ Ошибка загрузки: {ex.Message}')");
+                _jintService.ExecuteScript($"error('❌ Ошибка загрузки настроек: {ex.Message}')");
+                _jintService.ExecuteScript($"error('Stack trace: {ex.StackTrace}')");
                 Console.WriteLine($"Error loading settings: {ex.Message}");
             }
         }
@@ -285,7 +315,6 @@ namespace parserColorBackground
             {
                 _jintService.ExecuteScript("log('➕ Запуск мастера добавления цвета фона...')");
 
-                // Показываем Alert для ввода названия цвета
                 var result = await DisplayPromptAsync(
                     "🎨 Новый цвет фона",
                     "Введите название цвета для поиска в Google Images:",
@@ -297,8 +326,7 @@ namespace parserColorBackground
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
-                    // ШАГ 1: Валидация через JINT
-                    _jintService.ExecuteScript($"log('📝 ШАГ 1: Валидация названия «{result}»')");
+                    _jintService.ExecuteScript($"log('🔍 Проверка названия цвета: {result}')");
 
                     bool isValid = _jintService.ValidateString(result);
 
@@ -311,34 +339,20 @@ namespace parserColorBackground
                         return;
                     }
 
-                    _jintService.ExecuteScript($"info('✅ Валидация пройдена успешно')");
-
-                    // ШАГ 2: Проверка дубликатов через JINT
-                    _jintService.ExecuteScript($"log('📝 ШАГ 2: Проверка дубликатов в базе данных')");
+                    _jintService.ExecuteScript($"info('✅ Название прошло валидацию: {result}')");
 
                     var colors = await _databaseService.GetActiveColorsAsync();
                     _jintService.SetValue("existingColors", colors.Select(c => c.ColorName.ToLower()).ToArray());
                     _jintService.SetValue("newColor", result.ToLower());
 
                     var checkScript = @"
-                log('🔍 Поиск дубликатов...');
                 var exists = false;
-                var foundAt = -1;
-                
                 for (var i = 0; i < existingColors.length; i++) {
                     if (existingColors[i] === newColor) {
                         exists = true;
-                        foundAt = i;
                         break;
                     }
                 }
-                
-                if (exists) {
-                    warn('⚠️ Найден дубликат на позиции: ' + foundAt);
-                } else {
-                    info('✅ Дубликатов не найдено');
-                }
-                
                 exists;
             ";
 
@@ -350,35 +364,33 @@ namespace parserColorBackground
                         await DisplayAlert("⚠️ Дубликат найден",
                             $"Цвет «{result}» уже существует в базе данных!",
                             "OK");
+                        _jintService.ExecuteScript($"warn('⚠️ Цвет уже существует: {result}')");
                         return;
                     }
 
-                    // ШАГ 3: Построение поискового запроса через JINT
+                    LoadingIndicator.IsVisible = true;
+                    LoadingIndicator.IsRunning = true;
+
                     _jintService.ExecuteScript($"log('📝 ШАГ 3: Построение Google поискового запроса')");
 
                     var googleQuery = _jintService.BuildSearchQuery(result, "color");
 
                     _jintService.ExecuteScript($"info('🌐 Google запрос: «{googleQuery}»')");
 
-                    // ШАГ 4: Парсинг изображений
-                    LoadingIndicator.IsVisible = true;
-                    LoadingIndicator.IsRunning = true;
-
                     _jintService.ExecuteScript($"log('📝 ШАГ 4: Запуск парсинга Google Images')");
                     _jintService.ExecuteScript($"log('🌐 URL: https://www.google.com/search?q={Uri.EscapeDataString(googleQuery)}&tbm=isch')");
 
                     var urls = await _imageParserService.ParseGoogleImages(result, 10);
 
-                    // ШАГ 5: Анализ результатов через JINT
                     _jintService.ExecuteScript($"log('📝 ШАГ 5: Анализ результатов парсинга')");
 
                     var analysisMessage = _jintService.AnalyzeParsingResults(urls.Count, result);
 
                     if (urls.Count > 0)
                     {
-                        // ШАГ 6: Сохранение в БД
                         _jintService.ExecuteScript($"log('📝 ШАГ 6: Сохранение в базу данных')");
 
+                        // ИСПРАВЛЕНИЕ: Добавляем в базу
                         await _databaseService.AddColorAsync(new ColorOption
                         {
                             ColorName = result,
@@ -387,31 +399,36 @@ namespace parserColorBackground
 
                         _jintService.ExecuteScript($"info('✅ Цвет «{result}» успешно добавлен в БД')");
 
-                        // ШАГ 7: Отображение preview
                         _jintService.ExecuteScript($"log('📝 ШАГ 7: Отображение предпросмотра')");
 
-                        var previewImage = new Image
-                        {
-                            Source = ImageSource.FromUri(new Uri(urls[0])),
-                            Aspect = Aspect.AspectFill
-                        };
-                        PreviewFrame.Content = previewImage;
+                        _jintService.SetValue("imageCount", urls.Count);
+                        _jintService.ExecuteScript("info('🖼️ Найдено изображений: ' + imageCount)");
 
                         _jintService.ExecuteScript("info('✅ ВСЕ ШАГИ ЗАВЕРШЕНЫ УСПЕШНО!')");
 
+                        // ИСПРАВЛЕНИЕ: Автоматически загружаем этот цвет
+                        await LoadColorBackground(result);
+
                         await DisplayAlert("✅ Успех!",
-                            $"Цвет «{result}» успешно добавлен!\n\n" +
+                            $"Цвет «{result}» успешно добавлен и загружен!\n\n" +
                             $"🖼️ Найдено изображений: {urls.Count}\n" +
                             $"🔍 Поисковый запрос: {googleQuery}\n\n" +
-                            $"💡 Теперь вы можете выбрать его через кнопку «Выбрать цвет фона»",
+                            $"💡 Изображения уже отображаются ниже. Выберите понравившееся!",
                             "OK");
                     }
                     else
                     {
                         _jintService.ExecuteScript("error('❌ Парсинг не дал результатов')");
 
+                        // ИСПРАВЛЕНИЕ: Все равно добавляем цвет в базу
+                        await _databaseService.AddColorAsync(new ColorOption
+                        {
+                            ColorName = result,
+                            IsActive = true
+                        });
+
                         await DisplayAlert("⚠️ Предупреждение",
-                            $"Цвет «{result}» добавлен, но изображения не найдены.\n\n" +
+                            $"Цвет «{result}» добавлен в базу, но изображения не найдены.\n\n" +
                             $"🔍 Запрос: {googleQuery}\n\n" +
                             $"Попробуйте:\n" +
                             $"• Другое название\n" +
@@ -495,7 +512,6 @@ namespace parserColorBackground
             {
                 _jintService.ExecuteScript("log('➕ Запуск мастера добавления заставки...')");
 
-                // Показываем Alert для ввода названия заставки
                 var result = await DisplayPromptAsync(
                     "🖼️ Новая заставка",
                     "Введите название темы для поиска wallpaper в Google:",
@@ -507,8 +523,7 @@ namespace parserColorBackground
 
                 if (!string.IsNullOrWhiteSpace(result))
                 {
-                    // ШАГ 1: Валидация через JINT
-                    _jintService.ExecuteScript($"log('📝 ШАГ 1: Валидация названия «{result}»')");
+                    _jintService.ExecuteScript($"log('🔍 Проверка названия заставки: {result}')");
 
                     bool isValid = _jintService.ValidateString(result);
 
@@ -521,9 +536,8 @@ namespace parserColorBackground
                         return;
                     }
 
-                    _jintService.ExecuteScript($"info('✅ Валидация пройдена успешно')");
+                    _jintService.ExecuteScript($"info('✅ Название прошло валидацию: {result}')");
 
-                    // ШАГ 2: Проверка дубликатов
                     _jintService.ExecuteScript($"log('📝 ШАГ 2: Проверка дубликатов в базе данных')");
 
                     var exists = await _databaseService.SplashExistsAsync(result);
@@ -539,61 +553,59 @@ namespace parserColorBackground
 
                     _jintService.ExecuteScript("info('✅ Дубликатов не найдено')");
 
-                    // ШАГ 3: Построение поискового запроса через JINT
+                    LoadingIndicator.IsVisible = true;
+                    LoadingIndicator.IsRunning = true;
+
                     _jintService.ExecuteScript($"log('📝 ШАГ 3: Построение Google поискового запроса для wallpaper')");
 
                     var googleQuery = _jintService.BuildSearchQuery(result, "wallpaper");
 
                     _jintService.ExecuteScript($"info('🌐 Google запрос: «{googleQuery}»')");
 
-                    // ШАГ 4: Парсинг wallpaper
-                    LoadingIndicator.IsVisible = true;
-                    LoadingIndicator.IsRunning = true;
-
                     _jintService.ExecuteScript($"log('📝 ШАГ 4: Запуск парсинга HD wallpaper')");
                     _jintService.ExecuteScript($"log('🌐 URL: https://www.google.com/search?q={Uri.EscapeDataString(googleQuery)}&tbm=isch&tbs=isz:l')");
 
                     var urls = await _imageParserService.ParseHighQualityWallpapers(result, 8);
 
-                    // ШАГ 5: Анализ результатов через JINT
                     _jintService.ExecuteScript($"log('📝 ШАГ 5: Анализ результатов парсинга')");
 
                     var analysisMessage = _jintService.AnalyzeParsingResults(urls.Count, result);
 
                     if (urls.Count > 0)
                     {
-                        // ШАГ 6: Сохранение в БД
                         _jintService.ExecuteScript($"log('📝 ШАГ 6: Сохранение в базу данных')");
 
+                        // ИСПРАВЛЕНИЕ: Добавляем в базу
                         await _databaseService.AddSplashByNameAsync(result);
 
                         _jintService.ExecuteScript($"info('✅ Заставка «{result}» успешно добавлена в БД')");
 
-                        // ШАГ 7: Отображение preview
                         _jintService.ExecuteScript($"log('📝 ШАГ 7: Отображение предпросмотра первого wallpaper')");
 
-                        var previewImage = new Image
-                        {
-                            Source = ImageSource.FromUri(new Uri(urls[0])),
-                            Aspect = Aspect.AspectFill
-                        };
-                        PreviewFrame.Content = previewImage;
+                        _jintService.SetValue("wallpaperCount", urls.Count);
+                        _jintService.ExecuteScript("info('🖼️ Найдено wallpaper: ' + wallpaperCount)");
 
                         _jintService.ExecuteScript("info('✅ ВСЕ ШАГИ ЗАВЕРШЕНЫ УСПЕШНО!')");
 
+                        // ИСПРАВЛЕНИЕ: Автоматически загружаем эту заставку
+                        await LoadSplashScreen(result);
+
                         await DisplayAlert("✅ Успех!",
-                            $"Заставка «{result}» успешно добавлена!\n\n" +
+                            $"Заставка «{result}» успешно добавлена и загружена!\n\n" +
                             $"🖼️ Найдено HD wallpaper: {urls.Count}\n" +
                             $"🔍 Поисковый запрос: {googleQuery}\n\n" +
-                            $"💡 Теперь вы можете выбрать её через кнопку «Выбрать заставку»",
+                            $"💡 Wallpaper уже отображаются ниже. Выберите понравившийся!",
                             "OK");
                     }
                     else
                     {
                         _jintService.ExecuteScript("error('❌ Парсинг не дал результатов')");
 
+                        // ИСПРАВЛЕНИЕ: Все равно добавляем заставку в базу
+                        await _databaseService.AddSplashByNameAsync(result);
+
                         await DisplayAlert("⚠️ Предупреждение",
-                            $"Заставка «{result}» добавлена, но wallpaper не найдены.\n\n" +
+                            $"Заставка «{result}» добавлена в базу, но wallpaper не найдены.\n\n" +
                             $"🔍 Запрос: {googleQuery}\n\n" +
                             $"Попробуйте:\n" +
                             $"• Более конкретное название\n" +
@@ -794,6 +806,8 @@ namespace parserColorBackground
                 try
                 {
                     _jintService.ExecuteScript($"log('🖼️ Выбрано изображение: {imageItem.Title}')");
+                    _jintService.ExecuteScript($"log('🌐 URL изображения: {imageItem.ImageUrl}')");
+                    _jintService.ExecuteScript($"log('📂 Тип: {imageItem.Type}')");
 
                     var backgroundImage = new Image
                     {
@@ -802,16 +816,30 @@ namespace parserColorBackground
                     };
 
                     PreviewFrame.Content = backgroundImage;
+                    _jintService.ExecuteScript("info('✅ PreviewFrame обновлен')");
 
                     if (imageItem.Type == "Color")
                     {
-                        this.BackgroundImageSource = ImageSource.FromUri(new Uri(imageItem.ImageUrl));
+                        _jintService.ExecuteScript($"log('🎨 Установка фона для цвета...')");
+
+                        try
+                        {
+                            this.BackgroundImageSource = ImageSource.FromUri(new Uri(imageItem.ImageUrl));
+                            _jintService.ExecuteScript($"info('✅ BackgroundImageSource установлен для страницы')");
+                        }
+                        catch (Exception bgEx)
+                        {
+                            _jintService.ExecuteScript($"error('❌ Ошибка установки BackgroundImageSource: {bgEx.Message}')");
+                        }
+
                         _currentSelectedImageUrl = imageItem.ImageUrl;
 
                         var colorName = _databaseService.GetCurrentColor();
+                        _jintService.ExecuteScript($"log('💾 Сохранение в БД: {colorName} - {imageItem.ImageUrl}')");
+
                         await _databaseService.SaveCurrentBackgroundAsync(imageItem.ImageUrl, colorName);
 
-                        _jintService.ExecuteScript($"info('✅ Фон сохранен: {colorName}')");
+                        _jintService.ExecuteScript($"info('✅ Фон сохранен в БД: {colorName}')");
 
                         await DisplayAlert("Сохранено",
                             $"✅ Фон установлен!\n\nЭтот фон будет отображаться при следующем запуске приложения",
@@ -819,6 +847,8 @@ namespace parserColorBackground
                     }
                     else if (imageItem.Type == "Splash")
                     {
+                        _jintService.ExecuteScript($"log('🖼️ Сохранение заставки...')");
+
                         _databaseService.SetCurrentSplashImageUrl(imageItem.ImageUrl);
 
                         _jintService.ExecuteScript($"info('✅ Заставка сохранена: {imageItem.Title}')");
@@ -830,9 +860,148 @@ namespace parserColorBackground
                 }
                 catch (Exception ex)
                 {
+                    _jintService.ExecuteScript($"error('❌ КРИТИЧЕСКАЯ ОШИБКА в OnImageSelected: {ex.Message}')");
+                    _jintService.ExecuteScript($"error('Stack trace: {ex.StackTrace}')");
                     await DisplayAlert("Ошибка", $"Не удалось загрузить изображение: {ex.Message}", "OK");
-                    _jintService.ExecuteScript($"error('❌ Ошибка загрузки изображения: {ex.Message}')");
                 }
+            }
+            else
+            {
+                _jintService.ExecuteScript("warn('⚠️ OnImageSelected вызван, но imageItem == null')");
+            }
+        }
+
+        private async void OnDiagnosticClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                _jintService.ExecuteScript("log('🔍 Запуск диагностики...')");
+
+                // Проверка сохраненного фона
+                var savedBg = await _databaseService.GetCurrentBackgroundAsync();
+                var bgInfo = savedBg != null
+                    ? $"Цвет: {savedBg.ColorName}\nURL: {savedBg.ImageUrl}\nДата: {savedBg.SavedAt}"
+                    : "Нет сохраненного фона";
+
+                _jintService.ExecuteScript($"log('📊 Сохраненный фон: {bgInfo}')");
+
+                // Проверка сохраненного цвета
+                var savedColor = _databaseService.GetCurrentColor();
+                _jintService.ExecuteScript($"log('🎨 Сохраненный цвет: {savedColor ?? "null"}')");
+
+                // Проверка заставки
+                var savedSplashUrl = _databaseService.GetCurrentSplashImageUrl();
+                var savedSplashName = _databaseService.GetCurrentSplashName();
+                _jintService.ExecuteScript($"log('🖼️ Заставка: {savedSplashName ?? "null"}')");
+                _jintService.ExecuteScript($"log('🌐 URL заставки: {savedSplashUrl ?? "null"}')");
+
+                // Проверка платформы
+                var platform = DeviceInfo.Platform.ToString();
+                var version = DeviceInfo.VersionString;
+                _jintService.ExecuteScript($"log('📱 Платформа: {platform}')");
+                _jintService.ExecuteScript($"log('📱 Версия: {version}')");
+
+                // Проверка пути к БД
+                var dbPath = Path.Combine(FileSystem.AppDataDirectory, "colors.db3");
+                var dbExists = File.Exists(dbPath);
+                _jintService.ExecuteScript($"log('💾 БД путь: {dbPath}')");
+                _jintService.ExecuteScript($"log('💾 БД существует: {dbExists}')");
+
+                await DisplayAlert("Диагностика",
+                    $"Платформа: {platform}\n" +
+                    $"Версия: {version}\n\n" +
+                    $"Фон: {bgInfo}\n\n" +
+                    $"Цвет: {savedColor ?? "нет"}\n\n" +
+                    $"Заставка: {savedSplashName ?? "нет"}\n\n" +
+                    $"БД существует: {dbExists}\n\n" +
+                    $"Проверьте JINT Console для деталей",
+                    "OK");
+            }
+            catch (Exception ex)
+            {
+                _jintService.ExecuteScript($"error('❌ Ошибка диагностики: {ex.Message}')");
+            }
+        }
+
+        private async void OnImageTapped(object sender, EventArgs e)
+        {
+            try
+            {
+                _jintService.ExecuteScript("log('👆 OnImageTapped вызван')");
+
+                if (sender is Grid grid && grid.BindingContext is ImageItem imageItem)
+                {
+                    _jintService.ExecuteScript($"log('🖼️ Нажато на изображение: {imageItem.Title}')");
+                    _jintService.ExecuteScript($"log('🌐 URL: {imageItem.ImageUrl}')");
+                    _jintService.ExecuteScript($"log('📂 Тип: {imageItem.Type}')");
+
+                    // Визуальная обратная связь
+                    await grid.ScaleTo(0.95, 50);
+                    await grid.ScaleTo(1.0, 50);
+
+                    // Обновляем предпросмотр
+                    var previewImage = new Image
+                    {
+                        Source = ImageSource.FromUri(new Uri(imageItem.ImageUrl)),
+                        Aspect = Aspect.AspectFill
+                    };
+                    PreviewFrame.Content = previewImage;
+                    _jintService.ExecuteScript("info('✅ PreviewFrame обновлен')");
+
+                    if (imageItem.Type == "Color")
+                    {
+                        _jintService.ExecuteScript($"log('🎨 Установка фона цвета...')");
+
+                        try
+                        {
+                            // Устанавливаем фон страницы
+                            this.BackgroundImageSource = ImageSource.FromUri(new Uri(imageItem.ImageUrl));
+                            _jintService.ExecuteScript($"info('✅ BackgroundImageSource установлен')");
+                        }
+                        catch (Exception bgEx)
+                        {
+                            _jintService.ExecuteScript($"error('❌ Ошибка установки фона: {bgEx.Message}')");
+                        }
+
+                        _currentSelectedImageUrl = imageItem.ImageUrl;
+
+                        var colorName = _databaseService.GetCurrentColor();
+                        _jintService.ExecuteScript($"log('💾 Сохранение в БД: {colorName}')");
+
+                        await _databaseService.SaveCurrentBackgroundAsync(imageItem.ImageUrl, colorName);
+
+                        _jintService.ExecuteScript($"info('✅ Фон сохранен в БД')");
+
+                        await DisplayAlert("✅ Сохранено",
+                            $"Фон цвета '{colorName}' установлен!\n\n" +
+                            $"URL: {imageItem.ImageUrl.Substring(0, Math.Min(50, imageItem.ImageUrl.Length))}...\n\n" +
+                            $"Этот фон будет отображаться при следующем запуске приложения",
+                            "OK");
+                    }
+                    else if (imageItem.Type == "Splash")
+                    {
+                        _jintService.ExecuteScript($"log('🖼️ Установка заставки...')");
+
+                        _databaseService.SetCurrentSplashImageUrl(imageItem.ImageUrl);
+
+                        _jintService.ExecuteScript($"info('✅ Заставка сохранена')");
+
+                        await DisplayAlert("✅ Сохранено",
+                            $"Заставка '{imageItem.Title}' установлена!\n\n" +
+                            $"URL: {imageItem.ImageUrl.Substring(0, Math.Min(50, imageItem.ImageUrl.Length))}...\n\n" +
+                            $"Эта заставка будет показываться при запуске приложения (2-3 секунды)",
+                            "OK");
+                    }
+                }
+                else
+                {
+                    _jintService.ExecuteScript("error('❌ BindingContext не является ImageItem')");
+                }
+            }
+            catch (Exception ex)
+            {
+                _jintService.ExecuteScript($"error('❌ Ошибка в OnImageTapped: {ex.Message}')");
+                await DisplayAlert("Ошибка", $"Не удалось обработать нажатие: {ex.Message}", "OK");
             }
         }
 

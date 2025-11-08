@@ -59,7 +59,6 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-macca
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Graphics.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\SQLite-net.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\SQLitePCLRaw.batteries_v2.dll
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\SQLitePCLRaw.nativelibrary.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\SQLitePCLRaw.core.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\SQLitePCLRaw.provider.dynamic_cdecl.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\ar\Microsoft.Maui.Controls.resources.dll
@@ -308,3 +307,9 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-macca
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-maccatalyst\maccatalyst-x64\parserColorBackground.genruntimeconfig.cache
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-maccatalyst\maccatalyst-x64\ref\parserColorBackground.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-maccatalyst\maccatalyst-x64\parserColorBackground.sourcelink.json
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\libe_sqlite3.dylib
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Controls.HotReload.Forms.dll
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.TapContract.dll
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-maccatalyst\maccatalyst-x64\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll

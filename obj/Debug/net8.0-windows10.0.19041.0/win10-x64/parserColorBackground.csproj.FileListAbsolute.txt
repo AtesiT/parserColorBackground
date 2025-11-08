@@ -56,7 +56,6 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windo
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\SQLite-net.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\SQLitePCLRaw.batteries_v2.dll
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\SQLitePCLRaw.nativelibrary.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\SQLitePCLRaw.core.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\SQLitePCLRaw.provider.dynamic_cdecl.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\ar\Microsoft.Maui.Controls.resources.dll
@@ -98,11 +97,6 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windo
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\e_sqlite3.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\Microsoft.Windows.SDK.NET.dll
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\WinRT.Runtime.dll
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png
-D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\mauisplash.stamp
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\mauifont.stamp
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf
@@ -187,3 +181,9 @@ D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windo
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\ProjectArchitectures.txt
 D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\parserColorBackground.sourcelink.json
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png
+D:\Keys And Documents\Labs\4 Course\parserColorBackground\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png

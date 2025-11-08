@@ -119,6 +119,14 @@
                 CornerRadius="10"
                 HeightRequest="50"/>
 
+            <Button 
+                Text="🔍 Диагностика БД"
+                Clicked="OnDiagnosticClicked"
+                BackgroundColor="#607D8B"
+                TextColor="White"
+                CornerRadius="8"
+                Margin="0,10,0,0"/>
+
             <Label 
                 x:Name="SelectedColorLabel"
                 Text="Цвет не выбран"
@@ -205,20 +213,31 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="5" CornerRadius="10" HasShadow="True">
+                        <Frame Padding="5" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                            <!-- ИСПРАВЛЕНИЕ: Добавляем Grid с Tap жестом -->
                             <Grid>
-                                <Image 
-                                    Source="{Binding ImageUrl}"
-                                    Aspect="AspectFill"
-                                    HeightRequest="150"/>
-                                <Label 
-                                    Text="{Binding Title}"
-                                    BackgroundColor="#80000000"
-                                    TextColor="White"
-                                    Padding="10,5"
-                                    FontSize="14"
-                                    VerticalOptions="End"
-                                    HorizontalOptions="Fill"/>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnImageTapped" />
+                                </Grid.GestureRecognizers>
+
+                                <Grid RowDefinitions="150,Auto">
+                                    <!-- Изображение -->
+                                    <Image 
+                                        Grid.Row="0"
+                                        Source="{Binding ImageUrl}"
+                                        Aspect="AspectFill"
+                                        HeightRequest="150"/>
+
+                                    <!-- Подпись -->
+                                    <Label 
+                                        Grid.Row="1"
+                                        Text="{Binding Title}"
+                                        BackgroundColor="#80000000"
+                                        TextColor="White"
+                                        Padding="10,5"
+                                        FontSize="14"
+                                        HorizontalOptions="Fill"/>
+                                </Grid>
                             </Grid>
                         </Frame>
                     </DataTemplate>

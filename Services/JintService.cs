@@ -3,11 +3,14 @@ using System.Text;
 
 namespace parserColorBackground.Services
 {
+
+    /// Сервис для выполнения JavaScript кода в .NET приложении с помощью библиотеки JINT.
+
     public class JintService
     {
-        private readonly Engine _engine;
-        private readonly StringBuilder _consoleOutput;
-        public event EventHandler<string> ConsoleOutput;
+        private readonly Engine _engine;              // Движок JINT для выполнения JavaScript
+        private readonly StringBuilder _consoleOutput; // Буфер для накопления логов
+        public event EventHandler<string> ConsoleOutput; // Событие вывода в консоль
 
         public JintService()
         {
@@ -16,9 +19,18 @@ namespace parserColorBackground.Services
             InitializeEngine();
         }
 
+
+        /// Инициализация движка JINT.
+        /// Регистрирует все JavaScript функции, доступные в скриптах.
+
         private void InitializeEngine()
         {
-            // Расширенная консоль с разными уровнями
+            // ═══════════════════════════════════════════════════════════════
+            // СЕКЦИЯ 1: ФУНКЦИИ ЛОГИРОВАНИЯ
+            // ═══════════════════════════════════════════════════════════════
+
+            /// JavaScript функция: log(message)
+            /// Обычное логирование. Выводит сообщение с префиксом [LOG].
             _engine.SetValue("log", new Action<object>(obj =>
             {
                 var message = $"[LOG] {obj?.ToString()}";
@@ -27,6 +39,8 @@ namespace parserColorBackground.Services
                 ConsoleOutput?.Invoke(this, message);
             }));
 
+            /// JavaScript функция: info(message)
+            /// Информационные сообщения. Выводит с префиксом [INFO].
             _engine.SetValue("info", new Action<object>(obj =>
             {
                 var message = $"[INFO] {obj?.ToString()}";
@@ -35,6 +49,8 @@ namespace parserColorBackground.Services
                 ConsoleOutput?.Invoke(this, message);
             }));
 
+            /// JavaScript функция: warn(message)
+            /// Предупреждения. Выводит с префиксом [WARN].
             _engine.SetValue("warn", new Action<object>(obj =>
             {
                 var message = $"[WARN] {obj?.ToString()}";
@@ -43,6 +59,8 @@ namespace parserColorBackground.Services
                 ConsoleOutput?.Invoke(this, message);
             }));
 
+            /// JavaScript функция: error(message)
+            /// Ошибки. Выводит с префиксом [ERROR].
             _engine.SetValue("error", new Action<object>(obj =>
             {
                 var message = $"[ERROR] {obj?.ToString()}";
@@ -51,14 +69,25 @@ namespace parserColorBackground.Services
                 ConsoleOutput?.Invoke(this, message);
             }));
 
-            // Вспомогательные функции
+            // ═══════════════════════════════════════════════════════════════
+            // СЕКЦИЯ 2: ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+            // ═══════════════════════════════════════════════════════════════
+
+            /// JavaScript функция: clear()
+            /// Очищает весь буфер логов консоли.
             _engine.SetValue("clear", new Action(() =>
             {
                 _consoleOutput.Clear();
                 ConsoleOutput?.Invoke(this, "[Console cleared]");
             }));
 
-            // Функция для валидации данных
+            // ═══════════════════════════════════════════════════════════════
+            // СЕКЦИЯ 3: ФУНКЦИИ ВАЛИДАЦИИ
+            // ═══════════════════════════════════════════════════════════════
+
+            /// JavaScript функция: validate(input)
+            /// Проверяет корректность строки: не пустая и длина >= 2 символа.
+            /// Возвращает: true/false
             _engine.SetValue("validate", new Func<string, bool>(input =>
             {
                 if (string.IsNullOrWhiteSpace(input))
@@ -70,16 +99,27 @@ namespace parserColorBackground.Services
                 return true;
             }));
 
-            // Функция для форматирования массива
+            // ═══════════════════════════════════════════════════════════════
+            // СЕКЦИЯ 4: ФУНКЦИИ РАБОТЫ С МАССИВАМИ
+            // ═══════════════════════════════════════════════════════════════
+
+            /// JavaScript функция: formatArray(array)
+            /// Форматирует массив в строку с разделителями через запятую.
             _engine.SetValue("formatArray", new Func<object[], string>(array =>
             {
                 return string.Join(", ", array);
             }));
 
-            // Новая функция: формирование Google поискового запроса
+            // ═══════════════════════════════════════════════════════════════
+            // СЕКЦИЯ 5: ФУНКЦИИ ДЛЯ ПАРСИНГА GOOGLE IMAGES
+            // ═══════════════════════════════════════════════════════════════
+
+            /// JavaScript функция: buildGoogleQuery(searchTerm, type)
+            /// Формирует оптимальный поисковый запрос для Google Images.
+            /// Для "color": добавляет "background wallpaper 4k hd"
+            /// Для "wallpaper": добавляет "landscape wallpaper 4k hd desktop"
             _engine.SetValue("buildGoogleQuery", new Func<string, string, string>((searchTerm, type) =>
             {
-                // type: "color" или "wallpaper"
                 if (type == "color")
                 {
                     return $"{searchTerm} background wallpaper 4k hd";
@@ -88,10 +128,13 @@ namespace parserColorBackground.Services
                 {
                     return $"{searchTerm} landscape wallpaper 4k hd desktop";
                 }
+
                 return searchTerm;
             }));
 
-            // Новая функция: проверка качества поискового запроса
+            /// JavaScript функция: validateSearchQuery(query)
+            /// Проверяет качество поискового запроса.
+            /// Возвращает объект: { isValid, hasKeywords, quality }
             _engine.SetValue("validateSearchQuery", new Func<string, object>(query =>
             {
                 var result = new
@@ -100,9 +143,18 @@ namespace parserColorBackground.Services
                     hasKeywords = query.Contains("wallpaper") || query.Contains("background"),
                     quality = query.Contains("4k") || query.Contains("hd") ? "high" : "normal"
                 };
+
                 return result;
             }));
         }
+
+        // ═══════════════════════════════════════════════════════════════
+        // ПУБЛИЧНЫЕ МЕТОДЫ СЕРВИСА
+        // ═══════════════════════════════════════════════════════════════
+
+
+        /// Выполняет JavaScript код и возвращает результат в виде строки.
+        /// Основной метод для выполнения любого JS кода через движок JINT.
 
         public string ExecuteScript(string script)
         {
@@ -119,7 +171,10 @@ namespace parserColorBackground.Services
             }
         }
 
-        // Метод для валидации строки через JINT
+
+        /// Валидирует строку через JavaScript функцию validate().
+        /// Проверяет что строка не пустая и длина >= 2 символа.
+
         public bool ValidateString(string input)
         {
             try
@@ -140,7 +195,10 @@ namespace parserColorBackground.Services
             }
         }
 
-        // Новый метод: построение поискового запроса через JINT
+
+        /// Строит оптимальный поисковый запрос для Google Images через JavaScript.
+        /// Использует buildGoogleQuery() для формирования и validateSearchQuery() для проверки.
+
         public string BuildSearchQuery(string searchTerm, string type)
         {
             try
@@ -171,7 +229,10 @@ namespace parserColorBackground.Services
             }
         }
 
-        // Новый метод: анализ результатов парсинга
+
+        /// Анализирует результаты парсинга изображений через JavaScript.
+        /// Оценивает качество: отличное (>=5), хорошее (>=3), удовлетворительное (<3).
+        /// Логирует результат и дает рекомендации.
         public string AnalyzeParsingResults(int foundCount, string searchTerm)
         {
             try
@@ -182,8 +243,12 @@ namespace parserColorBackground.Services
                 var script = @"
                     var analysis = {
                         success: foundCount > 0,
-                        quality: foundCount >= 5 ? 'отличное' : foundCount >= 3 ? 'хорошее' : 'удовлетворительное',
-                        recommendation: foundCount === 0 ? 'Попробуйте другое название' : 'Результат найден'
+                        quality: foundCount >= 5 ? 'отличное' 
+                               : foundCount >= 3 ? 'хорошее' 
+                               : 'удовлетворительное',
+                        recommendation: foundCount === 0 
+                            ? 'Попробуйте другое название' 
+                            : 'Результат найден'
                     };
                     
                     if (analysis.success) {
@@ -205,21 +270,37 @@ namespace parserColorBackground.Services
             }
         }
 
+        // ═══════════════════════════════════════════════════════════════
+        // ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ
+        // ═══════════════════════════════════════════════════════════════
+
+
+        /// Устанавливает значение JavaScript переменной.
+        /// Передает данные из C# в JavaScript контекст.
+
         public void SetValue(string name, object value)
         {
             _engine.SetValue(name, value);
         }
+
+
+        /// Получает значение JavaScript переменной.
+        /// Конвертирует JS значение в объект .NET.
 
         public object GetValue(string name)
         {
             return _engine.GetValue(name).ToObject();
         }
 
+        /// Возвращает весь накопленный вывод консоли.
+        /// Полезно для отображения полной истории логов.
         public string GetConsoleOutput()
         {
             return _consoleOutput.ToString();
         }
 
+        /// Очищает весь буфер консоли.
+        /// Удаляет все накопленные логи.
         public void ClearConsole()
         {
             _consoleOutput.Clear();

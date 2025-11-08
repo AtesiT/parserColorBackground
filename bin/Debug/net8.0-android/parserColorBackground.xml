@@ -4,5 +4,41 @@
         <name>parserColorBackground</name>
     </assembly>
     <members>
+        <member name="T:parserColorBackground.Services.JintService">
+            Сервис для выполнения JavaScript кода в .NET приложении с помощью библиотеки JINT.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.InitializeEngine">
+            Инициализация движка JINT.
+            Регистрирует все JavaScript функции, доступные в скриптах.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.ExecuteScript(System.String)">
+            Выполняет JavaScript код и возвращает результат в виде строки.
+            Основной метод для выполнения любого JS кода через движок JINT.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.ValidateString(System.String)">
+            Валидирует строку через JavaScript функцию validate().
+            Проверяет что строка не пустая и длина >= 2 символа.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.BuildSearchQuery(System.String,System.String)">
+            Строит оптимальный поисковый запрос для Google Images через JavaScript.
+            Использует buildGoogleQuery() для формирования и validateSearchQuery() для проверки.
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:parserColorBackground.Services.JintService.AnalyzeParsingResults(System.Int32,System.String)" -->
+        <member name="M:parserColorBackground.Services.JintService.SetValue(System.String,System.Object)">
+            Устанавливает значение JavaScript переменной.
+            Передает данные из C# в JavaScript контекст.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.GetValue(System.String)">
+            Получает значение JavaScript переменной.
+            Конвертирует JS значение в объект .NET.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.GetConsoleOutput">
+            Возвращает весь накопленный вывод консоли.
+            Полезно для отображения полной истории логов.
+        </member>
+        <member name="M:parserColorBackground.Services.JintService.ClearConsole">
+            Очищает весь буфер консоли.
+            Удаляет все накопленные логи.
+        </member>
     </members>
 </doc>
